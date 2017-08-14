@@ -2,6 +2,8 @@ language: ruby
 bundler_args: --without test development
 cache: bundler
 before_install:
+  - gem update --system
+  - gem update
   - ci/install_deps.sh
   - export PATH=$PATH:$HOME/bin/
 script:
