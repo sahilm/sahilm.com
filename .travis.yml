@@ -1,0 +1,7 @@
+language: ruby
+bundler_args: --without test development
+cache: bundler
+before_install:
+  - ci/install_deps.sh
+script:
+  - bundle exec middleman build
