@@ -2,6 +2,8 @@
 
 set -e
 
+export PATH=$PATH:$HOME/bin:$(npm bin)
+
 if ! which pngout; then
   PNGOUT_VERSION="20150319"
   curl -sLO http://static.jonof.id.au/dl/kenutils/pngout-${PNGOUT_VERSION}-linux.tar.gz \
@@ -12,5 +14,5 @@ if ! which pngout; then
 fi
 
 if ! which svgo; then
-  npm install -g svgo
+  npm install svgo
 fi
