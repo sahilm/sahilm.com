@@ -10,6 +10,6 @@ before_install:
   - ci/install_deps.sh
   - export PATH=$PATH:$HOME/bin/:$(npm bin)
 script:
-  - bundle exec middleman build
+  - bundle exec middleman build -e production
 notifications:
   email: false
