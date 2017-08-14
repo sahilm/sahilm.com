@@ -4,7 +4,9 @@ config[:source] = 'src'
 activate :inliner
 activate :meta_tags
 activate :directory_indexes
-activate :syntax, line_numbers: false, css_class: 'code'
+set :markdown_engine, :redcarpet
+set :markdown, fenced_code_blocks: true, smartypants: true
+activate :syntax, line_numbers: false, css_class: 'syntax-highlight'
 activate :blog
 activate :autoprefixer
 configure :production do
