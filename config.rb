@@ -16,7 +16,7 @@ configure :production do
   activate :minify_html
   activate :imageoptim
   activate :gzip do |gz|
-    gz.overwrite = true
+    gz.overwrite = ENV.key?('DEVELOPMENT') ? false : true
   end
 end
 
