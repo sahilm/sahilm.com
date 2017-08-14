@@ -9,6 +9,7 @@ gem 'middleman-autoprefixer'
 gem 'middleman-inliner', github: 'sahilm/middleman-inliner'
 gem 'middleman-minify-html'
 gem 'middleman-imageoptim', github: 'plasticine/middleman-imageoptim', ref: 'a539cae'
+gem 'redcarpet'
 
 group :development do
   gem 'middleman-livereload'

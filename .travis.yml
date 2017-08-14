@@ -6,7 +6,10 @@ cache:
   - node_modules
   - $HOME/bin
 before_install:
+  - nvm install node
   - ci/install_deps.sh
   - export PATH=$PATH:$HOME/bin/:$(npm bin)
 script:
-  - bundle exec middleman build
+  - bundle exec middleman build --verbose
+notifications:
+  email: false
