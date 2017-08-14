@@ -15,7 +15,7 @@ activate :autoprefixer do |prefix|
   prefix.browsers = 'last 2 versions'
 end
 
-configure :production do
+configure :build do
   activate :asset_hash
   activate :minify_css, inline: true
   activate :minify_javascript
@@ -27,5 +27,11 @@ configure :production do
 end
 
 configure :development do
+  activate_livereload
+end
+
+def activate_livereload
   activate :livereload
+rescue StandardError => e
+  $stderr.puts e
 end
