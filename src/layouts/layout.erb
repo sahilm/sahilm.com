@@ -6,6 +6,15 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Sahil Muthoo | <%= current_page.data.title %></title>
+  <%= javascript_inline_tag 'webfontloader' %>
+  <script>
+    WebFont.load({
+      custom: {
+        families: ['Fira Code', 'Merriweather']
+      },
+      timeout: 5000
+    });
+  </script>
   <%= stylesheet_inline_tag 'site' %>
 </head>
 <body>

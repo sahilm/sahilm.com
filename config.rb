@@ -16,7 +16,8 @@ configure :production do
   activate :minify_html
   activate :imageoptim
   activate :gzip do |gz|
-    gz.overwrite = ENV.key?('DEVELOPMENT') ? false : true
+    gz.overwrite = ENV.key?('GZIP_NO_OVERWRITE') ? false : true
+    gz.exts = %w(.css .htm .html .js .svg .xhtml .ttf .json .ico .eot .otf)
   end
 end
 

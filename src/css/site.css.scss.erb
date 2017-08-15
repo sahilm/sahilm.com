@@ -1,8 +1,16 @@
 @font-face {
   font-family: 'Fira Code';
-  src: font-url('FiraCode-Regular.woff2') format('woff2'),
-  font-url('FiraCode-Regular.woff') format('woff');
+  src: font-url('fira-code/regular.woff2') format('woff2'),
+  font-url('fira-code/regular.woff') format('woff');
   font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: font-url('merriweather/light.woff2') format('woff2'),
+  font-url('merriweather/light.woff') format('woff');
+  font-weight: 300;
   font-style: normal;
 }
 
@@ -14,21 +22,50 @@
 }
 
 body {
-  font-family: "Fira Code", Consolas, Menlo, Inconsolata, "Courier New", monospace;
-  padding: 0 4rem;
-  font-feature-settings: "calt" 1;
-  max-width: 43.75rem;
-  margin: 0 auto;
+  /*padding: 0 4rem;*/
+  /*max-width: 43.75rem;*/
+  /*margin: 0 auto;*/
+
+  .post {
+    font-size: 16px;
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    line-height: 1.58;
+    letter-spacing: -0.004em;
+    font-weight: 300;
+    font-style: normal;
+    /*word-wrap: break-word;*/
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "liga" on;
+    color: rgba(0, 0, 0, 0.9);
+    /*margin: 5px;*/
+    .wf-active & {
+      font-family: "Merriweather", serif;
+    }
+  }
 
   .syntax-highlight {
     overflow: auto;
-    padding: .5rem 1rem;
-    line-height: 1.5;
-    font-size: 1rem;
-    margin-top: 1.92rem;
+    /*padding: .5rem 1rem;*/
     code {
-      font-family: "Fira Code", Consolas, Menlo, Inconsolata, "Courier New", monospace;
-      font-feature-settings: "calt" 1;
+      font-family: Consolas, Menlo, Inconsolata, "Courier New", monospace;
+      line-height: 1.2;
+      font-size: 14px;
+      /*margin-top: 1.92rem;*/
+      letter-spacing: -0.005em;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -moz-font-feature-settings: "liga" on;
+      font-weight: 400;
+      font-style: normal;
+
+      .wf-active & {
+        /*font-size: 14px;*/
+        /*line-height: 1.2;*/
+        font-family: "Fira Code", monospace;
+      }
     }
   }
 }
