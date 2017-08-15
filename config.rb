@@ -12,7 +12,7 @@ activate :autoprefixer
 configure :production do
   activate :asset_hash
   activate :minify_css, inline: true
-  activate :minify_javascript
+  activate :minify_javascript, inline: true
   activate :minify_html
   activate :imageoptim
   activate :gzip do |gz|
