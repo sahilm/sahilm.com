@@ -22,6 +22,7 @@ configure :production do
 end
 
 configure :development do
+  Bundler.require(:default, :development)
   activate_livereload
 end
 
