@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 xml.instruct!
 xml.feed 'xmlns' => 'http://www.w3.org/2005/Atom' do
   xml.link 'href' => 'https://sahilm.com/feed.xml',
@@ -14,7 +16,7 @@ xml.feed 'xmlns' => 'http://www.w3.org/2005/Atom' do
 
   xml.title 'Sahil Muthoo'
 
-  xml.author {xml.name 'Sahil Muthoo'}
+  xml.author { xml.name 'Sahil Muthoo' }
 
   blog.articles[0..10].each do |article|
     xml.entry do

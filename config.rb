@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 config[:css_dir] = 'css'
 config[:js_dir] = 'js'
 config[:source] = 'src'
@@ -22,6 +24,6 @@ configure :production do
   activate :imageoptim
   activate :gzip do |gz|
     gz.overwrite = ENV.key?('GZIP_NO_OVERWRITE') ? false : true
-    gz.exts = %w(.css .htm .html .js .svg .xhtml .ttf .json .xml .ico .eot .otf)
+    gz.exts = %w[.css .htm .html .js .svg .xhtml .ttf .json .xml .ico .eot .otf]
   end
 end
