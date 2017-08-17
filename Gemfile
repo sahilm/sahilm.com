@@ -10,12 +10,10 @@ gem 'middleman-inliner', github: 'sahilm/middleman-inliner'
 gem 'middleman-minify-html'
 gem 'middleman-imageoptim', github: 'plasticine/middleman-imageoptim', ref: 'a539cae'
 gem 'redcarpet'
+gem 'sass'
+gem 'builder'
+gem 'nokogiri'
 
-group :development do
-  gem 'middleman-livereload'
-end
-
-group :test do
-  gem 'scss_lint', require: false
-  gem 'rubocop'
-end
+# Dev stuff
+gem 'scss_lint', require: false
+gem 'rubocop'

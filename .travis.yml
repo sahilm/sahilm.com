@@ -13,3 +13,5 @@ script:
   - bundle exec middleman build -e production
 notifications:
   email: false
+env:
+  - NOKOGIRI_USE_SYSTEM_LIBRARIES: 1

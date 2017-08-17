@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'Fira Code';
+  src: font-url('fira-code/regular.woff2') format('woff2'),
+  font-url('fira-code/regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: font-url('merriweather/light.woff2') format('woff2'),
+  font-url('merriweather/light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}

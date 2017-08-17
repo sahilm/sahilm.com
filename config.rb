@@ -1,13 +1,18 @@
 config[:css_dir] = 'css'
 config[:js_dir] = 'js'
 config[:source] = 'src'
+page '/feed.xml', layout: false
+page '/sitemap.xml', layout: false
+activate :blog do |blog|
+  blog.permalink = '{title}.html'
+  blog.sources = '{title}.html'
+end
 activate :inliner
 activate :meta_tags
 activate :directory_indexes
 set :markdown_engine, :redcarpet
 set :markdown, fenced_code_blocks: true, smartypants: true
 activate :syntax, line_numbers: false, css_class: 'syntax-highlight'
-activate :blog
 activate :autoprefixer
 configure :production do
   activate :asset_hash
@@ -17,19 +22,6 @@ configure :production do
   activate :imageoptim
   activate :gzip do |gz|
     gz.overwrite = ENV.key?('GZIP_NO_OVERWRITE') ? false : true
-    gz.exts = %w(.css .htm .html .js .svg .xhtml .ttf .json .ico .eot .otf)
+    gz.exts = %w(.css .htm .html .js .svg .xhtml .ttf .json .xml .ico .eot .otf)
   end
-end
-
-configure :development do
-  Bundler.require(:default, :development)
-  activate_livereload
-end
-
-def activate_livereload
-  activate :livereload do |reload|
-    reload.no_swf = true
-  end
-rescue StandardError => e
-  $stderr.puts e
 end
