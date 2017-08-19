@@ -22,7 +22,7 @@ xml.feed 'xmlns' => 'http://www.w3.org/2005/Atom' do
     xml.entry do
       xml.title article.title
 
-      xml.link 'href' => article.url,
+      xml.link 'href' => full_url(article.url),
                'rel' => 'alternate',
                'type' => 'text/html',
                'title' => article.title
@@ -31,11 +31,11 @@ xml.feed 'xmlns' => 'http://www.w3.org/2005/Atom' do
 
       xml.updated article.date.to_time.iso8601
 
-      xml.id article.url
+      xml.id full_url(article.url)
 
       xml.content article.body,
                   'type' => 'html',
-                  'xml:base' => "https://sahilm.com#{article.url}"
+                  'xml:base' => full_url(article.url)
 
       xml.summary article.summary,
                   'type' => 'html'
