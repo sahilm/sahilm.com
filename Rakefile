@@ -7,7 +7,6 @@ task default: %w[test]
 desc 'test'
 task :test do
   sh 'rubocop'
-  sh 'scss-lint'
 end
 
 desc 'clean site'
