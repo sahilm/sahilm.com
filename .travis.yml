@@ -10,8 +10,9 @@ before_install:
   - nvm install node
   - ci/install_deps.sh
   - export PATH=$PATH:$HOME/bin/:$(npm bin)
-script:
+before_script:
   - bin/rake acceptance_test
+script:
   - bin/rake build
 env:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES: 1
