@@ -24,7 +24,7 @@ configure :production do
   activate :imageoptim
   activate :gzip do |gz|
     gz.overwrite = ENV.key?('GZIP_NO_OVERWRITE') ? false : true
-    gz.exts = %w[.css .htm .html .js .svg .xhtml .ttf .json .xml .ico .eot .otf]
+    gz.exts = %w[.css .htm .html .js .svg .xhtml .ttf .json .xml .ico .eot .otf .txt]
   end
 end
 
