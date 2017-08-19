@@ -6,12 +6,12 @@ cache:
   - node_modules
   - $HOME/bin
 before_install:
+  - gem update --system
+  - gem update
   - nvm install node
   - ci/install_deps.sh
   - export PATH=$PATH:$HOME/bin/:$(npm bin)
 script:
   - bundle exec middleman build -e production
-notifications:
-  email: false
 env:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES: 1
