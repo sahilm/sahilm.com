@@ -28,7 +28,7 @@ desc 'acceptance test'
 task acceptance_test: %w[clean test] do
   sh 'middleman build -e development'
   opts = {
-    check_img_http: true,
+    disable_external: true,
     check_html: true, validation: {
       report_missing_names: true
     },
