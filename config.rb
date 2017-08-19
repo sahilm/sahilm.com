@@ -7,16 +7,18 @@ page '/feed.xml', layout: false
 page '/sitemap.xml', layout: false
 activate :blog do |blog|
   blog.permalink = '{title}.html'
-  blog.sources = '{title}.html'
+  blog.sources = 'articles/{title}.html'
   blog.layout = 'article'
+  blog.prefix = '/'
 end
+page '/', layout: 'index'
 activate :inliner
 activate :meta_tags
 activate :directory_indexes
 set :markdown_engine, :redcarpet
 set :markdown, fenced_code_blocks: true, smartypants: true
 activate :syntax, line_numbers: false, css_class: 'syntax-highlight'
-activate :autoprefixer
+activate :autoprefixer, inline: true
 configure :production do
   activate :asset_hash
   activate :minify_css, inline: true

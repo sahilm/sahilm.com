@@ -1,31 +1,15 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <%= auto_display_meta_tags %>
-  <%= javascript_inline_tag 'webfontloader' -%>
-  <script>
-    WebFont.load({
-      custom: {
-        families: ['Fira Code', 'Merriweather']
-      },
-      timeout: 5000
-    });
-  </script>
-  <%= stylesheet_inline_tag 'article' %>
-</head>
-<body>
-<article>
-  <header>
-    <div class="heading">
-      <time><%= article_date(current_page) %></time> / <%= link_to 'Sahil Muthoo', '/' %>
-    </div>
-    <h1><%= current_page.data.title %></h1>
-  </header>
-  <%= yield %>
-</article>
-</body>
-</html>
+<% content_for :head do %>
+    <%= stylesheet_inline_tag 'article' %>
+<% end %>
+<% wrap_layout :core do %>
+    <article>
+      <header>
+        <div class="heading">
+          <time><%= article_date(current_page) %></time>
+          / <%= link_to 'Sahil Muthoo', '/' %>
+        </div>
+        <h1><%= current_page.data.title %></h1>
+      </header>
+      <%= yield %>
+    </article>
+<% end %>

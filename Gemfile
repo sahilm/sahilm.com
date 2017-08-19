@@ -17,7 +17,7 @@ gem 'nokogiri'
 gem 'oj'
 gem 'rake'
 gem 'redcarpet'
-gem 'sass'
+gem 'sassc'
 
 group :development do
   gem 'html-proofer'
