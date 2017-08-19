@@ -1,0 +1,44 @@
+@import 'vars';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: $white;
+  color: $grey;
+  font-size: 62.5%;
+}
+
+a {
+  color: $blue;
+
+  &:visited {
+    color: $purple;
+  }
+}
+
+.container {
+  font-family: $serif-fallback-fonts;
+  font-feature-settings: "calt" 1;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: 300;
+  height: 100%;
+  line-height: 1.25;
+  margin: 0 auto;
+  max-width: 43.75rem;
+  overflow-wrap: break-word;
+  text-rendering: optimizeLegibility;
+
+  .wf-active & {
+    font-family: $serif-fonts;
+  }
+}

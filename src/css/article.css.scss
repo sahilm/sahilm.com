@@ -1,26 +1,7 @@
 @import 'partials/fonts';
 @import 'partials/gruvbox';
-@import 'partials/reset';
+@import 'partials/base';
 @import 'partials/vars';
-
-article {
-  font-family: $serif-fallback-fonts;
-  font-feature-settings: "calt" 1;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-style: normal;
-  font-weight: 300;
-  height: 100%;
-  line-height: 1.25;
-  margin: 0 auto;
-  max-width: 43.75rem;
-  overflow-wrap: break-word;
-  text-rendering: optimizeLegibility;
-
-  .wf-active & {
-    font-family: $serif-fonts;
-  }
-}
 
 figure {
   img {
