@@ -78,7 +78,10 @@ helpers do
       'og:type' => 'object',
       'og:title' => data.title,
       'og:url' => full_url(page.url),
-      'og:description' => data.description
+      'og:description' => data.description,
+      'twitter:site' => 'sahilmuthoo',
+      'twitter:creator' => 'sahilmuthoo',
+
     }
     display_meta_tags(tags)
   end
