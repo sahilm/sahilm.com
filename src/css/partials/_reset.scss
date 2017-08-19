@@ -16,3 +16,10 @@ body {
   font-size: 62.5%;
 }
 
+a {
+  color: $blue;
+  &:visited {
+    color: $purple;
+  }
+}
+
