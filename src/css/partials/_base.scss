@@ -41,6 +41,10 @@ a {
   .wf-active & {
     font-family: $serif-fonts;
   }
+
+  @media #{$phone} {
+    margin: 1rem;
+  }
 }
 
 footer {
