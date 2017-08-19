@@ -20,6 +20,11 @@ task build: %w[clean test] do
   sh 'middleman build -e production'
 end
 
+desc 'build site for local testing'
+task build_local: %w[clean test] do
+  sh 'GZIP_NO_OVERWRITE=1 middleman build -e production'
+end
+
 desc 'acceptance test'
 task acceptance_test: %w[clean test] do
   sh 'middleman build -e development'
