@@ -1,8 +1,11 @@
-$body-bgcolor: #fff;
 $serif-fallback-fonts: Georgia, serif;
 $serif-fonts: Merriweather, $serif-fallback-fonts;
 $sans-fallback-fonts: Consolas, Menlo, Inconsolata, "Courier New", monospace;
 $sans-fonts: "Fira Code", $sans-fallback-fonts;
-$body-color: #3c3c3c;
-$heading-color: #444;
-$mark-color: rgba(7, 102, 120, 0.19);
+
+$white: #fff;
+$grey: #3c3c3c;
+$light-grey: #444;
+$translucent-aqua: rgba(7, 102, 120, 0.19);
+$deep-purple: #8f3f71;
+$light-purple: #b16286;

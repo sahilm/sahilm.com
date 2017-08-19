@@ -27,3 +27,10 @@ configure :production do
     gz.exts = %w[.css .htm .html .js .svg .xhtml .ttf .json .xml .ico .eot .otf]
   end
 end
+
+helpers do
+  def article_date(article)
+    date = article.date
+    date.strftime("#{date.day.ordinalize} %b %Y")
+  end
+end

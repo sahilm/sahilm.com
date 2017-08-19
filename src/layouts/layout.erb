@@ -19,6 +19,12 @@
 </head>
 <body>
 <article>
+  <header>
+    <div class="heading">
+      <date><%= article_date(current_page) %></date> / <%= link_to 'Sahil Muthoo', '/' %>
+    </div>
+    <h1><%= current_page.data.title %></h1>
+  </header>
   <%= yield %>
 </article>
 </body>

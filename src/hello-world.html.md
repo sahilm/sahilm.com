@@ -1,8 +1,7 @@
 ---
-title: Hello World
+title: This is an amazing title of something interesting
 date: 2017/08/17
 ---
-# This is an amazing title of something interesting
 
 ![Pretty Gophers](hello-world/fiveyears.jpg)
 

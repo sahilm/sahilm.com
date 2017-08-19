@@ -170,6 +170,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   builder
   bundler
   middleman
