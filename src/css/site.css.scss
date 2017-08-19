@@ -33,15 +33,23 @@ article {
 
 h1,
 h2,
+h3,
+p,
+.highlight {
+  margin: 1.5rem 0;
+}
+
+h1,
+h2,
 h3 {
   color: $heading-color;
   font-weight: 300;
-  margin: 1rem 0;
+  //margin: 1rem 0;
 }
 
 h1 {
   font-size: 2.5rem;
-  margin: 1rem 0 2.5rem;
+  //margin: 1rem 0 2.5rem;
 }
 
 h2 {
@@ -51,21 +59,22 @@ h2 {
 p {
   font-size: .95rem;
   line-height: 1.75;
-  margin-top: 1.5rem;
+  //margin-top: 1.5rem;
   word-wrap: break-word;
 }
 
 pre {
-  font-family: $sans-fallback-fonts;
   font-size: .8rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.3;
-  margin: 1.5rem 0;
+  line-height: 1.75;
+  //margin: 1.5rem 0;
   overflow: auto;
   padding: .5rem 1rem;
 
   code {
+    font-family: $sans-fallback-fonts;
+
     .wf-active & {
       font-family: $sans-fonts;
     }
@@ -77,6 +86,6 @@ mark {
 }
 
 img {
-  width: 100%;
   height: 100%;
+  width: 100%;
 }

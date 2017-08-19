@@ -171,6 +171,7 @@ PLATFORMS
 
 DEPENDENCIES
   builder
+  bundler
   middleman
   middleman-autoprefixer
   middleman-blog
