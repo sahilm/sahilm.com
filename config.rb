@@ -8,6 +8,7 @@ page '/sitemap.xml', layout: false
 activate :blog do |blog|
   blog.permalink = '{title}.html'
   blog.sources = '{title}.html'
+  blog.layout = 'article'
 end
 activate :inliner
 activate :meta_tags

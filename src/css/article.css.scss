@@ -3,12 +3,6 @@
 @import 'partials/reset';
 @import 'partials/vars';
 
-body {
-  background-color: $white;
-  color: $grey;
-  font-size: 62.5%;
-}
-
 article {
   font-family: $serif-fallback-fonts;
   font-feature-settings: "calt" 1;
