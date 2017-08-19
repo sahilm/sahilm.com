@@ -37,7 +37,7 @@ helpers do
   def figure(url, alt: nil, caption: nil)
     if caption
       content_tag(:figure) do
-        image_tag(url, alt: alt) + content_tag(:figcaption) {caption}
+        image_tag(url, alt: alt) + content_tag(:figcaption) { caption }
       end
     else
       image_tag(url, alt: alt)
@@ -45,6 +45,6 @@ helpers do
   end
 
   def mark(text)
-    content_tag(:mark) {text}
+    content_tag(:mark) { text }
   end
 end
