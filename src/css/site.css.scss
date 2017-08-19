@@ -37,6 +37,7 @@ figure {
   figcaption {
     font-family: $sans-fallback-fonts;
     font-size: .6rem;
+    margin: .2rem 0 0;
     text-align: center;
 
     .wf-active & {
