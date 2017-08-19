@@ -12,6 +12,7 @@ before_install:
   - ci/install_deps.sh
   - export PATH=$PATH:$HOME/bin/:$(npm bin)
 script:
-  - bundle exec middleman build -e production
+  - bin/rake acceptance_test
+  - bin/rake build
 env:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES: 1
