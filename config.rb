@@ -65,4 +65,21 @@ helpers do
     </script>
     EOF
   end
+
+  def full_url(url)
+    "https://sahilm.com#{url}"
+  end
+
+  def site_meta_tags(page)
+    data = page.data
+    tags = {
+      'og:image' => full_url(image_path(data.image)),
+      'og:site_name' => 'Sahil Muthoo',
+      'og:type' => 'object',
+      'og:title' => data.title,
+      'og:url' => full_url(page.url),
+      'og:description' => data.description
+    }
+    display_meta_tags(tags)
+  end
 end
