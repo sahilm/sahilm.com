@@ -33,4 +33,18 @@ helpers do
     date = article.date
     date.strftime("#{date.day.ordinalize} %b %Y")
   end
+
+  def figure(url, alt: nil, caption: nil)
+    if caption
+      content_tag(:figure) do
+        image_tag(url, alt: alt) + content_tag(:figcaption) {caption}
+      end
+    else
+      image_tag(url, alt: alt)
+    end
+  end
+
+  def mark(text)
+    content_tag(:mark) {text}
+  end
 end

@@ -28,6 +28,23 @@ article {
   }
 }
 
+figure {
+  img {
+    height: 100%;
+    width: 100%;
+  }
+
+  figcaption {
+    font-family: $sans-fallback-fonts;
+    font-size: .6rem;
+    text-align: center;
+
+    .wf-active & {
+      font-family: $sans-fonts;
+    }
+  }
+}
+
 .heading {
   display: block;
   font-family: $sans-fallback-fonts;
@@ -95,7 +112,3 @@ mark {
   background-color: $translucent-aqua;
 }
 
-img {
-  height: 100%;
-  width: 100%;
-}
