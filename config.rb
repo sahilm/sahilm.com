@@ -18,7 +18,7 @@ activate :directory_indexes
 set :markdown_engine, :redcarpet
 set :markdown, fenced_code_blocks: true, smartypants: true
 activate :syntax, line_numbers: false, css_class: 'syntax-highlight'
-activate :autoprefixer, inline: true
+activate :autoprefixer
 configure :production do
   activate :asset_hash
   activate :minify_css, inline: true
