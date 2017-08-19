@@ -71,8 +71,14 @@ helpers do
   end
 
   def site_meta_tags(page)
+    display_meta_tags(tags(page))
+  end
+
+  private
+
+  def tags(page)
     data = page.data
-    tags = {
+    {
       'og:image' => full_url(image_path(data.image)),
       'og:site_name' => 'Sahil Muthoo',
       'og:type' => 'object',
@@ -80,9 +86,8 @@ helpers do
       'og:url' => full_url(page.url),
       'og:description' => data.description,
       'twitter:site' => 'sahilmuthoo',
-      'twitter:creator' => 'sahilmuthoo',
+      'twitter:creator' => 'sahilmuthoo'
 
     }
-    display_meta_tags(tags)
   end
 end

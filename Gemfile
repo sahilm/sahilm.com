@@ -5,8 +5,8 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 gem 'activesupport'
 gem 'builder'
+gem 'execjs'
 gem 'middleman'
-gem 'middleman-autoprefixer'
 gem 'middleman-blog'
 gem 'middleman-imageoptim', github: 'plasticine/middleman-imageoptim', ref: 'a539cae'
 gem 'middleman-inliner', github: 'sahilm/middleman-inliner'

@@ -26,8 +26,6 @@ GEM
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
     ast (2.3.0)
-    autoprefixer-rails (7.1.2.6)
-      execjs
     backports (3.8.0)
     builder (3.2.3)
     coffee-script (2.4.1)
@@ -91,9 +89,6 @@ GEM
       middleman-cli (= 4.2.1)
       middleman-core (= 4.2.1)
       sass (>= 3.4.0, < 4.0)
-    middleman-autoprefixer (2.8.0)
-      autoprefixer-rails (>= 7.0.1, < 8.0.0)
-      middleman-core (>= 3.3.3)
     middleman-blog (4.0.2)
       addressable (~> 2.3)
       middleman-core (~> 4.0)
@@ -193,9 +188,9 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   builder
+  execjs
   html-proofer
   middleman
-  middleman-autoprefixer
   middleman-blog
   middleman-imageoptim!
   middleman-inliner!
