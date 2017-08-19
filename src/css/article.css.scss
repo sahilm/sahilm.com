@@ -4,87 +4,91 @@
 @import 'partials/base';
 @import 'partials/vars';
 
-figure {
-  img {
-    height: 100%;
-    width: 100%;
+article {
+  p {
+    font-size: .95rem;
+    line-height: 1.75;
+    word-wrap: break-word;
   }
 
-  figcaption {
+  figure {
+    img {
+      height: 100%;
+      width: 100%;
+    }
+
+    figcaption {
+      font-family: $sans-fallback-fonts;
+      font-size: .6rem;
+      margin: .2rem 0 0;
+      text-align: center;
+
+      .wf-active & {
+        font-family: $sans-fonts;
+      }
+    }
+  }
+
+  .heading {
+    display: block;
     font-family: $sans-fallback-fonts;
-    font-size: .6rem;
-    margin: .2rem 0 0;
-    text-align: center;
+    font-size: .7rem;
+    margin: .5rem 0 0;
 
     .wf-active & {
       font-family: $sans-fonts;
     }
   }
-}
 
-.heading {
-  display: block;
-  font-family: $sans-fallback-fonts;
-  font-size: .7rem;
-  margin: .5rem 0 0;
-
-  .wf-active & {
-    font-family: $sans-fonts;
+  header {
+    h1 {
+      margin: 1rem 0 1.5rem;
+    }
   }
-}
 
-header {
+  h1,
+  h2,
+  h3,
+  p,
+  .highlight {
+    margin: 1.5rem 0;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: $light-grey;
+    font-weight: 300;
+  }
+
   h1 {
-    margin: 1rem 0 1.5rem;
+    font-size: 2.5rem;
   }
-}
 
-h1,
-h2,
-h3,
-p,
-.highlight {
-  margin: 1.5rem 0;
-}
+  h2 {
+    font-size: 1.6rem;
+  }
 
-h1,
-h2,
-h3 {
-  color: $light-grey;
-  font-weight: 300;
-}
+  pre {
+    font-size: .8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.75;
+    overflow: auto;
+    padding: .5rem 1rem;
 
-h1 {
-  font-size: 2.5rem;
-}
+    code {
+      font-family: $sans-fallback-fonts;
 
-h2 {
-  font-size: 1.6rem;
-}
-
-p {
-  font-size: .95rem;
-  line-height: 1.75;
-  word-wrap: break-word;
-}
-
-pre {
-  font-size: .8rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.75;
-  overflow: auto;
-  padding: .5rem 1rem;
-
-  code {
-    font-family: $sans-fallback-fonts;
-
-    .wf-active & {
-      font-family: $sans-fonts;
+      .wf-active & {
+        font-family: $sans-fonts;
+      }
     }
   }
+
+  mark {
+    background-color: $translucent-aqua;
+  }
+
 }
 
-mark {
-  background-color: $translucent-aqua;
-}

@@ -16,12 +16,13 @@ h1 {
   time {
     color: $time-color;
     display: block;
-    font-size: 0.8rem;
+    font-size: .8rem;
   }
 
   a {
     display: block;
-    margin: 1rem 0 0;
+    line-height: 1.75;
+    margin: .7rem 0 0;
   }
 }
 
@@ -43,4 +44,8 @@ article {
 hr {
   border: 0;
   border-top: 2px solid $lighter-grey;
+
+  &:last-of-type {
+    border-top: 0;
+  }
 }

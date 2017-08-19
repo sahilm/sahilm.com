@@ -42,3 +42,30 @@ a {
     font-family: $serif-fonts;
   }
 }
+
+footer {
+  border-top: 2px solid $lighter-grey;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: .8rem;
+  line-height: 1.75;
+  margin: 6rem 0 0;
+  padding-top: 3em;
+
+  div {
+    flex: 1;
+  }
+
+  .contact {
+    font-family: $sans-fallback-fonts;
+    margin-left: 2rem;
+
+    .wf-active & {
+      font-family: $sans-fonts;
+    }
+  }
+
+  a {
+    display: block;
+  }
+}
