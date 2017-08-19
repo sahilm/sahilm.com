@@ -20,6 +20,6 @@ gem 'sass'
 
 group :development do
   gem 'html-proofer'
-  gem 'rubocop'
+  gem 'rubocop', require: false
   gem 'scss_lint', require: false
 end
