@@ -1,0 +1,52 @@
+---
+title: phar phar phar phar
+date: 2017/08/18
+description: Amazing stuff
+---
+
+<%= figure('hello-world/fiveyears.jpg', alt: 'Awesome Gophers', caption: 'Awesome Gophers') %>
+
+## In the beginning
+
+<%= mark('So wow, much amaze!') %>  [Google it](https://google.com/) Aliquam atque beatae culpa error, excepturi illum ipsum magnam magni modi nesciunt nihil nulla obcaecati omnis praesentium quaerat quam quis repudiandae sed.
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam atque beatae culpa error, excepturi illum ipsum magnam magni modi nesciunt nihil nulla obcaecati omnis praesentium quaerat quam quis repudiandae sed.
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam atque beatae culpa error, excepturi illum ipsum magnam magni modi nesciunt nihil nulla obcaecati omnis praesentium quaerat quam quis repudiandae sed.
+
+
+## Some amaze code
+
+```ruby
+module Shelter
+  class CommandParser < Struct.new(:cmd)
+    DEFAULT_COMMAND = -> { Shelter::Commands::Command }
+
+    def parse(something)
+      puts "Hello #{something}"
+      commands.detect(DEFAULT_COMMAND) do |command|
+        command.match?(cmd)
+      end.new(cmd)
+    end
+
+    private
+    def commands
+      @commands ||= _commands
+    end
+
+    def _commands
+      Shelter::Commands.constants.inject([]) do |memo, constant|
+        c = Shelter::Commands.const_get(constant)
+        memo << c if c.respond_to?(:match?)
+        memo
+      end
+    end
+  end
+end
+```
+
+
+## That's all folks
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam atque beatae culpa error, excepturi illum ipsum magnam magni modi nesciunt nihil nulla obcaecati omnis praesentium quaerat quam quis repudiandae sed.
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam atque beatae culpa error, excepturi illum ipsum magnam magni modi nesciunt nihil nulla obcaecati omnis praesentium quaerat quam quis repudiandae sed.
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam atque beatae culpa error, excepturi illum ipsum magnam magni modi nesciunt nihil nulla obcaecati omnis praesentium quaerat quam quis repudiandae sed.

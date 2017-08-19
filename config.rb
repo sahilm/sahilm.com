@@ -50,4 +50,17 @@ helpers do
   def mark(text)
     content_tag(:mark) { text }
   end
+
+  def fonts(*fonts)
+    <<-EOF
+    <script>
+      WebFont.load({
+                     custom: {
+                       families: #{fonts}
+                     },
+                     timeout: 5000
+                   });
+    </script>
+    EOF
+  end
 end
