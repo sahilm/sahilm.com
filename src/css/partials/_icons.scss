@@ -1,0 +1,30 @@
+@font-face {
+  font-family: 'icomoon';
+  src: font-url('fonts/icomoon/fonts.woff?ze3mub') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-envelop:before {
+  content: "\e945";
+}
+
+.icon-twitter:before {
+  content: "\ea96";
+}
+
+.icon-github:before {
+  content: "\eab0";
+}

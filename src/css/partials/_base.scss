@@ -1,4 +1,5 @@
 @import 'vars';
+@import 'icons';
 
 * {
   margin: 0;
@@ -49,32 +50,34 @@ a {
 
 footer {
   border-top: 2px solid $lighter-grey;
-  display: flex;
-  flex-wrap: wrap;
   font-size: .8rem;
   line-height: 1.75;
-  margin: 6rem 0 0;
-  padding-top: 3em;
+  margin: 3rem 0 0;
+  padding-top: 1em;
+  text-align: center;
 
-  @media #{$phone} {
-    margin: 3rem 0 0;
-    padding-top: 1em;
-  }
-
-  div {
-    flex: 1;
-  }
-
-  .contact {
-    font-family: $sans-fallback-fonts;
-    margin-left: 2rem;
-
+  .copyleft {
+    font-family: $serif-fallback-fonts;
     .wf-active & {
-      font-family: $sans-fonts;
+      font-family: $serif-fonts;
     }
   }
 
   a {
-    display: block;
+    font-size: 1.5rem;
+
+    &.icon {
+      color: $light-grey;
+      padding-left: 1em;
+      text-decoration: none;
+
+      &:visited {
+        color: $light-grey;
+      }
+
+      &:hover {
+        color: $dark-grey;
+      }
+    }
   }
 }
