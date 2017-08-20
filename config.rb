@@ -55,8 +55,7 @@ configure :production do
      application/json
      application/atom+xml
      application/rss+xml
-     application/xml
-  ].each do |mime_type|
+     application/xml].each do |mime_type|
     caching_policy mime_type, max_age: 300
   end
 
