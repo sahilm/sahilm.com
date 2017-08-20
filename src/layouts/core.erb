@@ -9,6 +9,7 @@
   <title><%= title(current_page) %></title>
   <%= favicon_tag 'images/favicon.ico' %>
   <link rel="alternate" href="https://sahilm.com/feed.xml" type="application/rss+xml" title="RSS feed">
+  <%= partial 'partials/ga' %>
   <%= javascript_inline_tag 'webfontloader' -%>
   <%= yield_content :head %>
 </head>
