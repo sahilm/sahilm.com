@@ -74,6 +74,15 @@ helpers do
     display_meta_tags(tags(page))
   end
 
+  def title(page)
+    data = page.data
+    if data.type == 'article'
+      "#{data.title} | Sahil Muthoo"
+    else
+      'Sahil Muthoo'
+    end
+  end
+
   private
 
   def tags(page)
@@ -81,7 +90,7 @@ helpers do
     {
       'og:image' => full_url(image_path(data.image)),
       'og:site_name' => 'Sahil Muthoo',
-      'og:type' => 'object',
+      'og:type' => data.type,
       'og:title' => data.title,
       'og:url' => full_url(page.url),
       'og:description' => data.description,

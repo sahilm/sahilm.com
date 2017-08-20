@@ -2,6 +2,7 @@
     <%= fonts('Fira Code', 'Merriweather') %>
     <%= stylesheet_inline_tag 'article' %>
 <% end %>
+<% current_page.data.type = 'article' %>
 <% wrap_layout :core do %>
     <article class="article">
       <header>

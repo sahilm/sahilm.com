@@ -1,0 +1,70 @@
+---
+title: Makefiles for Golang
+date: 2017/08/20
+description: |
+  Go's toolchain is awesome. Make makes the toolchain awesome-er.
+  Go's fast compile times and internal change-tracking eschews the need
+  for esoteric Makefiles. This is great since we can write simple Makefiles
+  to get the job done in style.
+image: "makefiles-for-golang/fiveyears.jpg"
+---
+
+<%= figure('makefiles-for-golang/fiveyears.jpg',
+  alt: 'Awesome Gophers',
+  caption: 'Awesome Gophers (The Go gopher was designed by Renee French (http://reneefrench.blogspot.com/).
+            The design is licensed under the Creative Commons 3.0 Attributions license.)') %>
+
+Go's toolchain is awesome. Make makes the toolchain awesome-er. Go's fast compile times and internal change-tracking
+eschews the need for esoteric Makefiles. This is great since we can write simple Makefiles to get the job done in style.
+
+The rest of this article assumes that you've written a Makefile or two. If not, [here](http://makefiletutorial.com/)
+[are](http://mrbook.org/blog/tutorials/make/) [a few](http://web.mit.edu/gnu/doc/html/make_2.html) references.
+
+## I don't need no stinkin' Makefile
+
+`go install` automagically checks if the binary is up to date. `go test` is all you need to kick-off tests that run
+at face melting speed. Why do I need a Makefile again?
+
+Have you ever felt the need to:
+
+* Communicate to your team how to build the project? Keep this information up to date?
+* Sanely install tools and update dependencies in CI?
+* Keep the above mentioned tools up to date and add new tools?
+* Build Windows, Darwin and Linux binaries in parallel?
+* Delete all your build shell scripts and start over?
+
+If you've answered yes to any of the above, Make might be the tool for you.
+
+## What makes Make awesome for Go?
+
+Make makes simple things easy and complex things possible. No scratch that, I was being overtly philosophical. Complex
+things are possible but you'll want to gouge your eyes out. Make is hairy, very hairy 😀
+
+Luckily, the Go toolchain and Go projects are simple. Simple stuff is fun with Make.
+
+## Baby's first Go Makefile
+
+If you're still reading, I've managed to pique your interest. Hurray! Let's dive into our first task with Make.
+
+<%= mark "Lint and test the codebase. Oh, and install any tools if they aren't already installed." %>
+
+```makefile
+.PHONY: check
+check: lint test
+
+.PHONY: lint
+lint: $(GOMETALINTER)
+    gometalinter ./... --vendor
+
+BIN_DIR := $(GOPATH)/bin
+GOMETALINTER := $(BIN_DIR)/gometalinter
+$(GOMETALINTER):
+	go get -u github.com/alecthomas/gometalinter
+	gometalinter --install &> /dev/null
+
+PKGS := $(shell go list ./... | grep -v /vendor)
+.PHONY: test
+test: setup
+	go test $(PKGS)
+
+```
