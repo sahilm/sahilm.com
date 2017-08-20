@@ -10,7 +10,9 @@
         <article>
           <h1>
             <time><%= article_date(article) %></time>
-            <a href="<%= article.url %>"><%= article.title %></a>
+            <div class="link">
+              <a href="<%= article.url %>"><%= article.title %></a>
+            </div>
           </h1>
         </article>
         <hr/>
