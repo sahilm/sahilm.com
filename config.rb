@@ -28,16 +28,18 @@ configure :production do
     options.manifest = false
     options.image_extensions = %w[.png .jpg .jpeg .gif .svg]
   end
-  activate :gzip do |gz|
-    gz.overwrite = false
-    gz.exts = %w[.css .htm .html .js .svg .xhtml .ttf .json .xml .ico .eot .otf .txt]
-  end
+  # Stop compression. CloudFront compresses automagically if Accept-Encoding: gzip is passed.
+  # If we always compress, curling the site produces binary garbage.
+  # activate :gzip do |gz|
+  #   gz.overwrite = false
+  #   gz.exts = %w[.css .htm .html .js .svg .xhtml .ttf .json .xml .ico .eot .otf .txt]
+  # end
   activate :s3_sync do |s3_sync|
     s3_sync.bucket = 'sahilm.com'
     s3_sync.region = 'eu-west-1'
-    s3_sync.delete = false
+    s3_sync.delete = true
     s3_sync.after_build = false
-    s3_sync.prefer_gzip = true
+    s3_sync.prefer_gzip = false
     s3_sync.path_style = true
     s3_sync.reduced_redundancy_storage = false
     s3_sync.acl = 'public-read'
