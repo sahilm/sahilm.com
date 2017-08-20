@@ -1,0 +1,11 @@
+<% content_for :head do %>
+    <%= fonts('Merriweather') %>
+    <%= stylesheet_inline_tag '404' %>
+<% end %>
+<% wrap_layout :core do %>
+    <header>
+      <h1>There's Nothing Here</h1>
+    </header>
+    <h2>Time to go back <%= link_to('home', '/') %>, perhaps?</h2>
+    <%= partial 'partials/footer' %>
+<% end %>

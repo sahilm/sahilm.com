@@ -12,6 +12,7 @@ activate :blog do |blog|
   blog.prefix = '/'
 end
 page '/', layout: 'index'
+page '/404.html', layout: '404'
 activate :inliner
 activate :meta_tags
 activate :directory_indexes
@@ -88,7 +89,6 @@ helpers do
   def tags(page)
     data = page.data
     {
-      'og:image' => full_url(image_path(data.image)),
       'og:site_name' => 'Sahil Muthoo',
       'og:type' => data.type,
       'og:title' => data.title,
@@ -97,6 +97,8 @@ helpers do
       'twitter:site' => 'sahilmuthoo',
       'twitter:creator' => 'sahilmuthoo'
 
-    }
+    }.tap do |t|
+      t['og:image'] = full_url(image_path(data.image)) if data.image
+    end
   end
 end
