@@ -50,6 +50,7 @@ configure :production do
 
   %w[text/html
      text/xml
+     text/plain
      image/x-icon
      image/vnd.microsoft.icon
      application/json
