@@ -29,7 +29,7 @@ configure :production do
     options.image_extensions = %w[.png .jpg .jpeg .gif .svg]
   end
   activate :gzip do |gz|
-    gz.overwrite = ENV.key?('GZIP_NO_OVERWRITE') ? false : true
+    gz.overwrite = false
     gz.exts = %w[.css .htm .html .js .svg .xhtml .ttf .json .xml .ico .eot .otf .txt]
   end
 end
