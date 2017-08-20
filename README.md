@@ -1,4 +1,4 @@
-# Source code and Articles for [sahilm.com](https://sahilm.com)
+Source code and articles for [sahilm.com](https://sahilm.com)
 
 # LICENSES
 
