@@ -47,6 +47,20 @@ configure :production do
     s3_sync.index_document = 'index.html'
     s3_sync.error_document = '404/index.html'
   end
+
+  %w[text/html
+     text/xml
+     image/x-icon
+     image/vnd.microsoft.icon
+     application/json
+     application/atom+xml
+     application/rss+xml
+     application/xml
+  ].each do |mime_type|
+    caching_policy mime_type, max_age: 300
+  end
+
+  default_caching_policy max_age: (60 * 60 * 24 * 365)
 end
 
 helpers do
