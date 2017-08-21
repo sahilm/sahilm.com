@@ -46,7 +46,7 @@ Luckily, the Go toolchain and Go projects are simple. Simple stuff is fun with M
 
 If you're still reading, I've managed to pique your interest. Hurray! Let's dive into our first task with Make.
 
-<%= mark "Lint and test the codebase. Oh, and install any tools if they aren't already installed." %>
+<mark>Lint and test the codebase. Oh, and install any tools if they aren't already installed.</mark>
 
 ```makefile
 .PHONY: check
@@ -68,3 +68,36 @@ test: setup
 	go test $(PKGS)
 
 ```
+
+Our primary target here is `check`. It first lints and then tests. If linting fails, the build is failed and tests
+are never run. We're using [gometalinter](https://github.com/alecthomas/gometalinter) to lint. Notice how `check`
+depends on `lint` which further depends on `$(GOMETALINTER)`.
+
+`$(GOMETALINTER)` describes a target which tracks the `gometalinter` binary in our `$GOPATH`. When we run `check` on
+a machine that doesn't have `gometalinter`, it'll download and setup `gometalinter`. On subsequent runs of `check`,
+nothing is downloaded because the binary is already there.
+
+Essentially, you can run `make check` on any machine, locally or in CI and you're guaranteed to get a build. You can go
+ahead and delete all your tool installation scripts.
+
+## Building releases in parallel
+
+```makefile
+BINARY := mytool
+VERSION ?= latest
+PLATFORMS := darwin/amd64 linux/amd64 windows/amd64
+
+temp = $(subst /, ,$@)
+os = $(word 1, $(temp))
+arch = $(word 2, $(temp))
+
+.PHONY: $(PLATFORMS)
+$(PLATFORMS): setup
+	mkdir -p $(CURDIR)/release
+	GOOS=$(os) GOARCH=$(arch) go build -ldflags="-X main.version=$(VERSION)" \
+	-o release/$(BINARY)-v$(VERSION)-$(os)-$(arch)
+
+.PHONY: release
+release: $(PLATFORMS)
+```
+
