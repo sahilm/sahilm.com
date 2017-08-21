@@ -54,7 +54,7 @@ check: lint test
 
 .PHONY: lint
 lint: $(GOMETALINTER)
-		gometalinter ./... --vendor
+	gometalinter ./... --vendor
 
 BIN_DIR := $(GOPATH)/bin
 GOMETALINTER := $(BIN_DIR)/gometalinter
