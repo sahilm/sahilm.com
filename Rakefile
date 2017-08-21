@@ -15,7 +15,7 @@ task :clean do
 end
 
 desc 'build site'
-task build: %w[clean test] do
+task build: %w[test] do
   sh 'middleman build -e production'
 end
 

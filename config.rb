@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'middleman-s3_sync'
 
 config[:css_dir] = 'css'
@@ -26,8 +27,9 @@ configure :production do
   activate :minify_javascript, inline: true
   activate :minify_html
   activate :imageoptim do |options|
-    options.manifest = false
+    options.manifest = true
     options.image_extensions = %w[.png .jpg .jpeg .gif .svg]
+    options.jpegoptim = { allow_lossy: true, strip: ['all'], max_quality: 85 }
   end
   # Stop compression. CloudFront compresses automagically if Accept-Encoding: gzip is passed.
   # If we always compress, curling the site produces binary garbage.
