@@ -60,10 +60,10 @@ configure :production do
      application/atom+xml
      application/rss+xml
      application/xml].each do |mime_type|
-    caching_policy mime_type, max_age: 300
+    caching_policy mime_type, public: true, max_age: 300
   end
 
-  default_caching_policy max_age: (60 * 60 * 24 * 365)
+  default_caching_policy public: true, max_age: (60 * 60 * 24 * 365)
 end
 
 helpers do
