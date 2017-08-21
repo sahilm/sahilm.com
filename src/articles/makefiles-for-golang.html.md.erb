@@ -54,7 +54,7 @@ check: lint test
 
 .PHONY: lint
 lint: $(GOMETALINTER)
-    gometalinter ./... --vendor
+		gometalinter ./... --vendor
 
 BIN_DIR := $(GOPATH)/bin
 GOMETALINTER := $(BIN_DIR)/gometalinter
@@ -66,7 +66,6 @@ PKGS := $(shell go list ./... | grep -v /vendor)
 .PHONY: test
 test: setup
 	go test $(PKGS)
-
 ```
 
 Our primary target here is `check`. It first lints and then tests. If linting fails, the build is failed and tests
