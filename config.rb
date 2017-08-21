@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'middleman-s3_sync'
 
 config[:css_dir] = 'css'
 config[:js_dir] = 'js'

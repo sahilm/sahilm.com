@@ -12,7 +12,7 @@ gem 'middleman-imageoptim', github: 'plasticine/middleman-imageoptim', ref: 'a53
 gem 'middleman-inliner', github: 'sahilm/middleman-inliner'
 gem 'middleman-meta-tags'
 gem 'middleman-minify-html'
-gem 'middleman-s3_sync'
+gem 'middleman-s3_sync', require: false
 gem 'middleman-syntax'
 gem 'mime-types'
 gem 'nokogiri'
