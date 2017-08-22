@@ -129,8 +129,8 @@ helpers do
       'og:url' => full_url(page.url),
       'og:description' => data.description,
       'twitter:site' => 'sahilmuthoo',
-      'twitter:creator' => 'sahilmuthoo'
-
+      'twitter:creator' => 'sahilmuthoo',
+      'description' => data.description
     }.tap do |t|
       t['og:image'] = full_url(image_path(data.image)) if data.image
     end

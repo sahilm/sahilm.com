@@ -9,6 +9,9 @@
   <title><%= title(current_page) %></title>
   <%= favicon_tag 'images/favicon.ico' %>
   <link rel="alternate" href="https://sahilm.com/feed.xml" type="application/rss+xml" title="RSS feed">
+  <link rel="canonical" href="https://sahilm.com/">
+  <link rel="icon" href="<%= image_path('bulb-bot.svg') %>" type="image/svg+xml">
+  <link rel="shortcut icon" href="<%= image_path('favicon.ico') %>" type="image/x-icon">
   <%= partial 'partials/ga' %>
   <%= javascript_inline_tag 'webfontloader' -%>
   <%= yield_content :head %>
