@@ -54,12 +54,6 @@ configure :production do
     options.image_extensions = %w[.png .jpg .jpeg .gif .svg]
     options.jpegoptim = { allow_lossy: true, strip: ['all'], max_quality: 85 }
   end
-  # Stop compression. CloudFront compresses automagically if Accept-Encoding: gzip is passed.
-  # If we always compress, curling the site produces binary garbage.
-  # activate :gzip do |gz|
-  #   gz.overwrite = false
-  #   gz.exts = %w[.css .htm .html .js .svg .xhtml .ttf .json .xml .ico .eot .otf .txt]
-  # end
   activate :s3_sync do |s3_sync|
     s3_sync.bucket = 'sahilm.com'
     s3_sync.region = 'eu-west-1'
