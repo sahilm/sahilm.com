@@ -3,19 +3,6 @@
     <%= stylesheet_inline_tag 'index' %>
 <% end %>
 <% wrap_layout :core do %>
-    <header>
-      <h1>Sahil Muthoo</h1>
-    </header>
-    <% blog.articles.each do |article| %>
-        <article>
-          <h1>
-            <time><%= article_date(article) %></time>
-            <div class="link">
-              <a href="<%= article.url %>"><%= article.title %></a>
-            </div>
-          </h1>
-        </article>
-        <hr/>
-    <% end %>
+    <%= yield %>
     <%= partial 'partials/footer' %>
 <% end %>
