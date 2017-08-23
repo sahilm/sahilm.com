@@ -24,6 +24,11 @@
   }
 
   .anchor {
+
+    @media #{$phone} {
+      display: none;
+    }
+
     float: left;
     margin-left: -20px;
     line-height: 1;
