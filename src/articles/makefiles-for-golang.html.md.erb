@@ -26,7 +26,7 @@ Your project's Makefile will typically live in its root directory.
 
 Makefiles are composed of rules that look like this:
 
-```makefile
+```text
 target: prerequisites
 	recipe
 ```
@@ -45,7 +45,7 @@ default indentation character in some versions of `make` but it's best to stick 
 
 Let's look at a simple example:
 
-```makefile
+```text
 abc: xyz
 	echo "abc" > abc
 
@@ -56,7 +56,7 @@ xyz:
 This Makefile declares 2 rules. The target `abc` depends on `xyz` and both of them have recipes that generate their
 respective targets. Let's run make for the first time:
 
-```
+```text
 $ make
 echo "xyz" > xyz
 echo "abc" > abc
@@ -67,10 +67,11 @@ see that `make` runs the prerequisite `xyz` before running `abc`.
 
 Let's try running make again:
 
-```
+```text
 $ make
 make: 'abc' is up to date.
 ```
+
 `make` declares that there's nothing to do. The files `xyz` and `abc` already exist. All dependencies have been satisfied
 and there is no work to be done. `make's` dependency tracking is a powerful feature which we'll exploit in a bit.
 
@@ -81,7 +82,7 @@ Before that, we must understand one last thing. Variables.
 Variables in `make` are quite simple. A variable is declared using `VAR := value`. `VAR` is referenced via `$(VAR)`.
 All three components of a rule, the target, prerequisites and recipe may contain variables. Let's look at another simple example:
 
-```makefile
+```text
 FILE := abc
 
 $(FILE): xyz
@@ -116,7 +117,7 @@ build up our Makefile with useful stuff. Let's get to it!
 
 Let's start by writing a rule to run our tests:
 
-```makefile
+```text
 PKGS := $(shell go list ./... | grep -v /vendor)
 
 .PHONY: test
@@ -141,7 +142,7 @@ It's an excellent _meta_-linter that runs a bunch of awesome linters concurrentl
 
 Our first pass at writing a lint rule may look like this:
 
-```makefile
+```text
 PKGS := $(shell go list ./... | grep -v /vendor)
 
 .PHONY: test
@@ -162,7 +163,7 @@ We can do so by running `make lint`.
 This is looking great already. But perhaps we'd like to lint before we test? Let's recall that we can specify prerequisites
 in rules. Our test rule can be adapted to look like this:
 
-```makefile
+```text
 .PHONY: test
 test: lint
 	go test $(PKGS)
@@ -178,7 +179,7 @@ and tries to run `make` it'll fail with an ugly error. Unless of course they hav
 
 Wouldn't it be nice if `make` could install `gometalinter` for us? Well I'm glad you asked. Let's try doing just that:
 
-```makefile
+```text
 BIN_DIR := $(GOPATH)/bin
 GOMETALINTER := $(BIN_DIR)/gometalinter
 
@@ -195,10 +196,10 @@ to other variables.
 This generated rule isn't useful on it's own. <mark>It shines when it's used as a prerequisite.</mark> Let's go ahead
 and add the generated rule as a prerequisite of the `lint` rule:
 
-```makefile
+```text
 .PHONY: lint
 lint: $(GOMETALINTER)
-	gometalinter ./... --vendor
+  gometalinter ./... --vendor
 ```
 
 That's it. Every time lint executes, `$(GOMETALINTER)` will execute. Since `$(GOMETALINTER)` is not a phony target, it'll
@@ -207,7 +208,7 @@ is up-to-date and make will skip the rule.
 
 Let's now look at our complete Makefile as it stands:
 
-```makefile
+```text
 PKGS := $(shell go list ./... | grep -v /vendor)
 
 .PHONY: test
@@ -231,7 +232,7 @@ build it's dependency graph pruning up-to-date targets along the way.
 
 Let's examine the output of running `make` for the first time:
 
-```
+```text
 $ make
 go get -u github.com/alecthomas/gometalinter
 gometalinter --install &> /dev/null
@@ -243,7 +244,7 @@ ok  	github.com/sahilm/yamldiff	0.351s
 `make` installed `gometalinter`, then ran `lint` and finally it ran our tests. The next time we run `make`, it will
 skip the installation of `gometalinter` since it's already installed. Let's validate that assumption:
 
-```
+```text
 $ make
 gometalinter ./... --vendor
 go test github.com/sahilm/yamldiff
@@ -262,7 +263,7 @@ It's time to enjoy the icing. Let's use `make` to build production releases in p
 
 Easy first pass:
 
-```makefile
+```text
 BINARY := mytool
 
 .PHONY: windows
@@ -287,7 +288,7 @@ release: windows linux darwin
 We've defined 3 rules to build our binary on Windows, Linux and Darwin. Running them in parallel is easy with the `-j` flag
 to `make`. Let's run 3 jobs:
 
-```
+```text
 $ make release -j3
 mkdir -p release
 mkdir -p release
@@ -307,7 +308,7 @@ and [automatic variables](https://www.gnu.org/software/make/manual/html_node/Aut
 
 We'll use the text function `word` and automatic variable `$@`. Let's see it in action:
 
-```makefile
+```text
 BINARY := mytool
 
 PLATFORMS := windows linux darwin
@@ -338,7 +339,7 @@ version string and override it from the outside at build time. To achieve this w
 
 Let's modify our rule:
 
-```makefile
+```text
 BINARY := mytool
 VERSION ?= vlatest
 PLATFORMS := windows linux darwin
@@ -355,7 +356,7 @@ release: windows linux darwin
 
 We declare the `VERSION` variable using a default of `vlatest`. This can be overridden like so:
 
-```
+```text
 $ make VERSION=v2.0.0 release -j3
 mkdir -p release
 mkdir -p release
@@ -371,7 +372,7 @@ Notice how the version changed to `v2.0.0`. Now our release rule looks good to g
 
 Let's look at the Makefile we made, shall we:
 
-```makefile
+```text
 PKGS := $(shell go list ./... | grep -v /vendor)
 
 .PHONY: test
