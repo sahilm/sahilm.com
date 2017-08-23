@@ -23,6 +23,33 @@
     }
   }
 
+  .title > .anchor {
+    padding-right: 2px;
+    margin-left: -1rem;
+    visibility: hidden;
+    font-size: .95rem;
+    color: $dark-grey;
+    text-decoration: none;
+  }
+
+  .anchor {
+    &:hover {
+      visibility: visible;
+    }
+  }
+
+  .title {
+    &:hover {
+      .anchor {
+        visibility: visible;
+      }
+    }
+  }
+
+  //.title .anchor {
+  //  display: inline-block;
+  //}
+
   figure {
     img {
       height: 100%;
@@ -93,6 +120,10 @@
 
   h2 {
     font-size: 1.6rem;
+  }
+
+  h3 {
+    font-size: 1.15rem;
   }
 
   mark {

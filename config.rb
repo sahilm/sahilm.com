@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'middleman-s3_sync'
+require 'middleman-core/renderers/redcarpet'
 
 config[:css_dir] = 'css'
 config[:js_dir] = 'js'
@@ -18,8 +19,30 @@ page '/404.html', layout: '404'
 activate :inliner
 activate :meta_tags
 activate :directory_indexes
+class AnchorRenderer < Middleman::Renderers::MiddlemanRedcarpetHTML
+  def header(title, level)
+    @headers ||= []
+    permalink = title.gsub(/\W+/, '-')
+
+    if @headers.include? permalink
+      permalink += '_1'
+      permalink = permalink.succ while @headers.include? permalink
+    end
+    @headers << permalink
+
+    %(
+      <h#{level} id=\"#{permalink}\" class="title">
+        <a name="#{permalink}" class="anchor icon" href="##{permalink}">
+          <i class="icon-link" title="link"></i>
+          <span class="sr-only">link</span>
+        </a>
+        #{title}
+      </h#{level}>
+    )
+  end
+end
 set :markdown_engine, :redcarpet
-set :markdown, fenced_code_blocks: true, smartypants: true
+set :markdown, fenced_code_blocks: true, smartypants: true, renderer: AnchorRenderer
 activate :syntax, line_numbers: false, css_class: 'syntax-highlight'
 configure :production do
   activate :asset_hash

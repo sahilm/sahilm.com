@@ -19,7 +19,27 @@ eschews the need for esoteric Makefiles. This is great since we can write simple
 
 ## Quick primer on Make
 
-Feel free to skip this section if you're already familiar with Make.
+### Introduction
+
+Make is a build tool from the [70s](https://en.wikipedia.org/wiki/Make_(software)#Origin). It's pre-installed on most OS X and Linux machines. It can be installed on Windows using [Cygwin](https://www.cygwin.com/).
+
+Builds are described in files known as Makefiles. Makefiles are composed of rules that look like this:
+
+```makefile
+target: prerequisites
+	recipe
+```
+
+The target is a name of a file. Prerequisites are rules to run _before_ the target/file is built. A recipe describes how
+to build the target/file.
+
+The combination of target, its prerequisites and recipe is known as a `rule`. Rules describes how make should rebuild something,
+should it need rebuilding. Makes detects changes to targets by tracking the last modified time of its prerequisites. If a prerequisite has changed since the target was last built, the target will be rebuilt. Otherwise Make takes no action and declares the target up-to-date.
+
+Let's know look at a simple example:
+
+
+
 ## I don't need no stinkin' Makefile
 
 `go install` automagically checks if the binary is up to date. `go test` is all you need to kick-off tests that run
