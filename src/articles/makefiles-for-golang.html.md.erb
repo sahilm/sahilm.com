@@ -21,9 +21,7 @@ eschews the need for esoteric Makefiles. This is great since we can write simple
 
 ### Introduction
 
-Make is a build tool from the [70s](https://en.wikipedia.org/wiki/Make_(software)#Origin). It's pre-installed on most OS X and Linux machines. It can be installed on Windows using [Cygwin](https://www.cygwin.com/).
-
-Builds are described in files known as Makefiles. Makefiles are composed of rules that look like this:
+Make is a build tool from the [70s](https://en.wikipedia.org/wiki/Make_(software)#Origin). Builds are described in files known as Makefiles. Makefiles are composed of rules that look like this:
 
 ```makefile
 target: prerequisites
@@ -38,6 +36,37 @@ should it need rebuilding. Makes detects changes to targets by tracking the last
 
 Let's know look at a simple example:
 
+```makefile
+abc: xyz
+	echo "abc" > abc
+
+xyz:
+	echo "xyz" > xyz
+```
+
+This Makefile declares 2 rules. The target `abc` depends on `xyz` and both of them have recipes that generate their
+respective targets. Let's run make for the first time:
+
+```bash
+$ make
+echo "xyz" > xyz
+echo "abc" > abc
+```
+Notice how I didn't specify which target to build. Make chose the first target as the default. In this case `abc`. We
+see that Make runs the prerequisite `xyz` before running `abc`.
+
+Let's try running make again:
+
+```bash
+$ make
+make: 'abc' is up to date.
+```
+Make declares that there's nothing to do. The files `xyz` and `abc` already exist. All dependencies have been satisfied
+and there is no work to be done. Make's dependency tracking is a powerful feature which we'll exploit in a bit.
+
+Before that, we must understand one last thing. Variables.
+
+### Make Variables
 
 
 ## I don't need no stinkin' Makefile
