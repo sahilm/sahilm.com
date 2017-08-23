@@ -1,6 +1,6 @@
 @import 'partials/firacode';
 @import 'partials/merriweather';
-@import 'partials/gruvbox';
+@import 'partials/syntax/gruvbox-light';
 @import 'partials/base';
 @import 'partials/vars';
 
@@ -36,7 +36,7 @@
     color: $dark-grey;
     text-decoration: none;
     &:hover {
-      &>.icon-link {
+      & > .icon-link {
         visibility: visible;
       }
     }

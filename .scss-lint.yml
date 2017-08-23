@@ -1,6 +1,6 @@
 scss_files: 'src/css/**'
 
 exclude:
-  - 'src/css/partials/_gruvbox.scss'
+  - 'src/css/partials/_gruvbox-light.scss'
 
 severity: warning
