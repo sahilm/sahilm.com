@@ -140,6 +140,9 @@
 
   mark {
     background-color: $mark-bgcolor;
+    code {
+      background-color: $mark-bgcolor;
+    }
   }
 
 }
