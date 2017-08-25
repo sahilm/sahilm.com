@@ -93,3 +93,18 @@ footer {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+mark {
+  background-color: $mark-bgcolor;
+  code {
+    background-color: $mark-bgcolor;
+  }
+}
+
+::selection {
+  background-color: $mark-bgcolor;
+}
+
+::-moz-selection {
+  background-color: $mark-bgcolor;
+}
