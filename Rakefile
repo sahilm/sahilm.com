@@ -9,7 +9,7 @@ end
 
 desc 'sync site to s3'
 task :s3_sync do
-  sh 'middleman s3_sync -B'
+  sh 'middleman s3_sync -B -e production'
 end
 
 namespace :build do
