@@ -87,8 +87,7 @@ configure :production do
 end
 
 helpers do
-  def article_date(article)
-    date = article.date
+  def formatted_date(date)
     date.strftime("#{date.day.ordinalize} %b %Y")
   end
 
