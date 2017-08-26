@@ -3,6 +3,7 @@
 require 'middleman-s3_sync'
 require 'middleman-core/renderers/redcarpet'
 
+Time.zone = 'Dublin'
 config[:css_dir] = 'css'
 config[:js_dir] = 'js'
 config[:source] = 'src'
