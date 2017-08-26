@@ -20,9 +20,3 @@ gem 'oj'
 gem 'rake'
 gem 'redcarpet'
 gem 'sassc'
-
-group :development do
-  gem 'html-proofer'
-  gem 'rubocop', require: false
-  gem 'scss_lint', require: false
-end
