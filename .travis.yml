@@ -3,12 +3,15 @@ cache:
   bundler: true
   directories:
   - node_modules
-  - $HOME/bin
+  - "$HOME/bin"
 before_install:
-  - nvm install node
-  - ci/install_deps.sh
-  - export PATH=$PATH:$HOME/bin/:$(npm bin)
+- nvm install node
+- ci/install_deps.sh
+- export PATH=$PATH:$HOME/bin/:$(npm bin)
 script:
-  - bin/rake build:production
+- bin/rake build:production
 env:
+  matrix:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES: 1
+  global:
+    secure: wxr0gDLOE66vscaGbjiyI6n+3E6a7sQ+9U0ho5nV+z21giNf3hZrS5FmJ+jqSBVb+v+G3subFFAHuW8gLV9ff6rIpqR5MjknaZHmbk4hbKeSUAwP8mPyBZaUGL9YjLfSL5hnVKyH6YjSOmWTKhoH94H/DYFNkjZ4D9hqpxw01K+WlYeT7qDE+iXoA/3+Kjysd2nS3M3DYY3+xbUZWETZnMoXCheKTkkcavf6Cd6tOYMkt4S37a1pjYfEKGRHITrq0SLMW8DeVI5IrkQrWXgqspcofSH6p6RoZrjheA8ZCmyFZVOVukyF0OzogsMqlfl9oNwVVNlxnbp22ryKXYg0z/T4E425jo3Xl25/X3qg2cfQOCH6msodkTSkRMOWiHYZ9h+tjjIoiOE7WT+DiHjDXoh/M4jwSjSEPWoT9JWHms7XwmkKDv/JSA7PB98lVA6+9QJO7RiHR+5uNhsHaik80YO80TJAlQxzQs3LPY3Am3noZxKpbyHkIVe2o7CBk1MU4h8xUVt6VI2KAeZUEauMvWRGh1eTBOLvMiPToPIfty2pOhc5b48Pbw/8mDWXTJGlLhne+PUvHvyzfKUMfC4sW2Xw1Mjmwwb3NS4PFOonT0YdYK7dan6M0p5vioHY6yMDBK1iTfC5VMVPouisvtwQ/LODWfTuSoM3ejVOMCgecv8=
