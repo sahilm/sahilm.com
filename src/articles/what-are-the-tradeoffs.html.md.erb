@@ -53,8 +53,35 @@ They’re deeply aware of the costs and constantly looking for the value.
 
 On the other hand, libraries are abstractions. Abstractions are the root of all progress.
 <mark>Without such powerful abstractions we would still be twiddling bits on pieces of perforated paper.</mark> The Unity game engine
-lets programmers build games that run on a vast majority mobiles, PCs and consoles. How’s that for an abstraction? A lot of programmers
+lets programmers build games that run on the vast majority mobiles, PCs and consoles. How’s that for an abstraction? A lot of programmers
 trade-off a lot, including money, to use Unity.
 
 All tradeoffs are not made equal. Each time we add a dependency, use a library, introduce a framework we must question the value.
 The bargain must be solid.
+
+## Documenting tradeoffs
+
+Documenting tradeoffs are a good way to make the decision deliberate. Let's say you need to decide on a full-text search
+engine. After evaluating Elasticsearch and PostgreSQL you concluded that PostgreSQL is a better fit for your use case. Maybe
+you already have a robust PostgreSQL deployment and limited full-text search needs.
+
+It's good to document why you chose Postgres over Elasticsearch. Maybe you could put it in the user story or epic. Be sure
+to mention that you're aware of missing full-text search features in Postgres but you've traded that off for easier operations.
+
+If your software lives long enough, a time will come when tradeoffs will need to be re-evaluated. At such time, a record
+of past decisions will help greatly.
+
+## Architecture decision records and tradeoffs
+
+It's becoming more common to capture Architectural decisions in a log-book style format of an
+[ADR](http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions). Even though the initial blog post
+doesn't explicitly mention documenting tradeoffs. I strongly suggest that we as developers start doing so. Our log books,
+stories and commits should document important tradeoffs as we make them. It just helps make our lives easier.
+
+I hope I've managed to convince you that we make tradeoffs all the time. It's better if we star being more deliberate about them.
+It'll make our lives and the lives of other stakeholders much easier. We make the tradeoffs anyway, let's just start writing them down.
+
+I would love to hear your thoughts, please contact me via the interwebz using the links below. Cheers!
+
+
+
