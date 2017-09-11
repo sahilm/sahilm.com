@@ -1,0 +1,60 @@
+---
+title: What are the tradeoffs?
+date: 2017/09/11
+description: |
+  Software is a collection of tradeoffs; made one line, one function, one feature at a time.
+  If the tradeoffs we make match up with the ones our customers are willing to make, the software wins.
+  Otherwise, we end up with the software crisis.
+image: "what-are-the-tradeoffs/balance.jpg"
+---
+
+<%= figure('what-are-the-tradeoffs/balance.jpg',
+  alt: 'Two-pan balance weight',
+  caption: '<a href="https://flic.kr/p/iKb1Sd">Two-pan balance weight</a>') %>
+
+> tradeoff
+
+> noun
+
+> a balance achieved between two desirable but incompatible features; a compromise.
+
+> a giving up of one thing in return for another.
+
+<mark>Software is a collection of tradeoffs; made one line, one function, one feature at a time.</mark>
+If the tradeoffs we make match up with the ones our customers are willing to make, the software wins.
+Otherwise, we end up with the software crisis.
+
+We as programmers constantly struggle with tradeoffs. We make choices to the best of our abilities.
+It’s time that we shared our burden with other stakeholders.
+
+I suggest that we become deliberate about tradeoffs. If you do user stories, include a tradeoffs section in each story.
+While designing on a white board, let’s constantly ask, "What are the tradeoffs?".
+"Do these tradeoffs align with the ones our customers are willing to make?".
+
+## Tradeoffs and stakeholders
+
+Stakeholders are often times the best judges of a bargain. Any time we’re seduced by new-shiny™,
+it’s good to ask another stakeholder. For example, _event-driven-eventually-consistent-microservices_ sound so sexy.
+Asking a stakeholder if they’re OK with eventually consistent transactions should be enough to break our stupor.
+
+If businesses ask us to finish work in unreasonable time, we should make them aware of the tradeoff.
+Work completed in a hurry will build technical debt. Debt that must be paid in full when it’s due.
+
+## All tradeoffs are not made equal
+
+Adding a dependency is a tradeoff. We tradeoff complete understanding and control of our code in exchange for time.
+In recent times, the left-pad fiasco from the NodeJS community is a shining example. For the uninitiated,
+left-pad was a NodeJS library that left-padded strings. The library was yanked by the author for political reasons
+leaving several broken projects in its wake.
+
+The programmers who used left-pad gave up control of their projects for a function of a few lines. This was a poor bargain.
+They gave up control for very little, if any, time. A programmer mindful of tradeoffs will always be tuned towards such problems.
+They’re deeply aware of the costs and constantly looking for the value.
+
+On the other hand, libraries are abstractions. Abstractions are the root of all progress.
+<mark>Without such powerful abstractions we would still be twiddling bits on pieces of perforated paper.</mark> The Unity game engine
+lets programmers build games that run on a vast majority mobiles, PCs and consoles. How’s that for an abstraction? A lot of programmers
+trade-off a lot, including money, to use Unity.
+
+All tradeoffs are not made equal. Each time we add a dependency, use a library, introduce a framework we must question the value.
+The bargain must be solid.

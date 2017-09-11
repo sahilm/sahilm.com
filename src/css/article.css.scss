@@ -160,6 +160,16 @@
     }
   }
 
+  blockquote {
+    margin-top: 1.5rem;
+    padding: 0 1em;
+    color: $light-grey;
+    border-left: 0.25em solid $lighter-grey;
+    font-style: italic;
+    p {
+      margin-top: .5rem;
+    }
+  }
 }
 
 .syntax-highlight {
