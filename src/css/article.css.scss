@@ -1,6 +1,6 @@
 @import 'partials/firacode';
 @import 'partials/merriweather';
-@import 'partials/syntax/tomorrow';
+//@import 'partials/syntax/gruvbox-light';
 @import 'partials/base';
 @import 'partials/vars';
 
@@ -15,16 +15,17 @@
     line-height: 1.75;
     word-wrap: break-word;
 
-    code {
-      font-style: normal;
-      font-weight: 400;
-      background-color: $code-bgcolor;
+  }
 
-      font-family: $sans-fallback-fonts;
+  code {
+    font-style: normal;
+    font-weight: 400;
+    background-color: $code-bgcolor;
 
-      .wf-active & {
-        font-family: $sans-fonts;
-      }
+    font-family: $sans-fallback-fonts;
+
+    .wf-active & {
+      font-family: $sans-fonts;
     }
   }
 
@@ -173,6 +174,7 @@
 }
 
 .syntax-highlight {
+  background-color: $mark-bgcolor;
   overflow: auto;
   padding: .5rem 1rem;
   font-size: .8rem;
@@ -181,11 +183,7 @@
   line-height: 1.75;
 
   code {
-    font-family: $sans-fallback-fonts;
-
-    .wf-active & {
-      font-family: $sans-fonts;
-    }
+    background-color: $mark-bgcolor;
   }
 }
 

@@ -1,0 +1,271 @@
+---
+title: TCP servers that run like clockwork
+date: 2017/09/17
+description: |
+  Go is a great language to write networked services. Such services often depend on TCP for their underlying
+  transport. Understanding how to write robust TCP servers is vital. It helps us understand the underpinnings
+  of stuff we build every day. We learn to appreciate the stack we stand on.
+image: "tcp-servers-that-run-like-clockwork/watch.jpg"
+---
+
+<%= figure('tcp-servers-that-run-like-clockwork/watch.jpg',
+  alt: 'Time out',
+  caption: '<a href="https://www.flickr.com/photos/cosmicherb70/16132759228/">Time out</a>') %>
+
+Go is a great language to write networked services. Such services often depend on TCP for their underlying
+transport. Understanding how to write robust TCP servers is vital. It helps us understand the underpinnings
+of stuff we build every day. We learn to appreciate the stack we stand on.
+
+## The shouting service
+
+We'll start off by building a simple TCP server. It shouts back at the client. It takes the client's input,
+turns it into upper-case and sends it back to the client. The wire-protocol is line-based request-response.
+Requests can be terminated with `\r\n` or `\n`. Responses are always terminated with `\n`.
+
+### In action
+
+```text
+$ telnet 0.0.0.0 8080
+Trying 0.0.0.0...
+Connected to 0.0.0.0.
+Escape character is '^]'.
+Hello. How are you?
+HELLO. HOW ARE YOU?
+Ok. Be shouty!
+OK. BE SHOUTY!
+Bye!
+BYE!
+^]
+telnet> Connection closed.
+```
+
+### Plumbing
+
+```go
+type Server struct {
+	Addr string
+}
+
+func (srv Server) ListenAndServe() error {
+	addr := srv.Addr
+	if addr == "" {
+		addr = ":8080"
+	}
+	log.Printf("starting server on %v\n", addr)
+	listener, err := net.Listen("tcp", addr)
+	if err != nil {
+		return err
+	}
+	defer listener.Close()
+	for {
+		conn, err := listener.Accept()
+		if err != nil {
+			log.Printf("error accepting connection %v", err)
+		}
+		log.Printf("accepted connection from %v", conn.RemoteAddr())
+		handle(conn) //TODO: Implement me
+	}
+}
+```
+
+We start off by writing some plumbing code to listen on the provided `addr`, accept connections and forward those
+connections to `handle(conn)` which we're yet to implement. Our server's business logic (upcasing strings :) will live
+in `handle`.
+
+### Handler
+
+```go
+func handle(conn net.Conn) error {
+	defer func() {
+		log.Printf("closing connection from %v", conn.RemoteAddr())
+		conn.Close()
+	}()
+	r := bufio.NewReader(conn)
+	w := bufio.NewWriter(conn)
+	scanr := bufio.NewScanner(r)
+	for {
+		scanned := scanr.Scan()
+		if !scanned {
+			if err := scanr.Err(); err != nil {
+				log.Printf("%v(%v)", err, conn.RemoteAddr())
+				return err
+			}
+			break
+		}
+		w.WriteString(strings.ToUpper(scanr.Text()) + "\n")
+		w.Flush()
+	}
+	return nil
+}
+```
+
+Our handler scans the user input, reading till the first `\r\n` or `\n`. Once read, we upcase the input and write
+that back to the client. Then, we keep scanning for more user input until we hit an error or `EOF`.
+
+Notice how we're reading/writing in an seemingly infinite loop. That's because we must keep scanning on the same
+TCP connection. Do you see how this could be a problem? What if the client walks away and never closes the connection?
+We'll be stuck in an infinite loop.
+
+## Shouting concurrently
+
+Our silly server can only handle one client at a time. That's not nice! What if many people need a good shouting? Luckily, this
+is easy to fix in any concurrent language. We just need to run the handler concurrently. Let's introduce a [goroutine](https://gobyexample.com/goroutines).
+
+We replace `handle(conn)` with `go handle(conn)`. That's it. Our server can now concurrently handle clients. To understand why,
+we can inspect the code of `ListenAndServe`. Here's the flow of execution of `ListenAndServe`:
+
+* We start listening on a TCP socket.
+* Next up, we try to accept a connection from a client. If nobody is trying to connect, `accept` will block and wait.
+* On successful connection acceptance, we call `handle(conn)` with the accepted connection.
+
+Now since, `handle` blocks and waits for user input, `ListenAndServe` is blocked. We need to get to `accept` to be able
+to process the next connection but we're stuck waiting on `handle`. The simple solution is to fire off `handle` in a goroutine.
+That frees up the current execution and we go back to `accept`. Here we block and wait again.
+
+## Give idle clients the boot
+
+We discussed that we're doomed if clients connect and walk away. We need to do something about idle clients. We need to
+introduce timeouts.<mark>Networked services that don't timeout are utterly broken</mark>. If there's one thing that
+you take away from this article, this should be it.
+
+Luckily, Go makes it easy to introduce an idle timeout. We're looking to boot clients that haven't spoken to us in a while.
+Let's see how that's done.
+
+```go
+type Server struct {
+	Addr        string
+	IdleTimeout time.Duration
+}
+```
+
+First we introduce a configurable `IdleTimeout` field. Next up, we set the deadline to be `current time + IdleTimeout` in
+the future.
+
+```go
+conn.SetDeadline(time.Now().Add(conn.IdleTimeout))
+```
+
+Now the clock is ticking. The deadline is an absolute value. This connection will die soon unless we update the deadline.
+On successful operations, we repeatedly update the deadline. If we fail to update the deadline, it dies. How morbid!
+
+Anyway, what's a successful operation? Well in TCP terms, successful operations involve reads and writes. If the
+TCP socket is being read from and/or written to, we're making progress. If there's been no activity for a while, that means
+the connection is dead or unhealthy and must be torn down.
+
+To update the deadline on read/write, we wrap `conn` with our own custom implementation of `conn`. The only difference
+in our implementation is that we update deadlines. Here's our `conn`.
+
+```go
+type Conn struct {
+	net.Conn
+	IdleTimeout time.Duration
+}
+
+func (c *Conn) Write(p []byte) (int, error) {
+	c.updateDeadline()
+	return c.Conn.Write(p)
+}
+
+func (c *Conn) Read(b []byte) (int, error) {
+	c.updateDeadline()
+	return c.Conn.Read(b)
+}
+
+func (c *Conn) updateDeadline() {
+	idleDeadline := time.Now().Add(c.IdleTimeout)
+	c.Conn.SetDeadline(idleDeadline)
+}
+```
+
+It easy to see that if we use our wrapped `conn` instead of the original `conn` we'll manage to keep the connection alive
+for as long as it's active. Since our wrapped `conn` implements the `net.Conn` interface, we can inject it wherever, `net.Conn`
+is expected, such as `handle(conn)`.
+
+```go
+conn := &Conn{
+			Conn:        newConn,
+			IdleTimeout: srv.IdleTimeout,
+		}
+conn.SetDeadline(time.Now().Add(conn.IdleTimeout))
+go handle(conn)
+```
+
+Let's see what happens to idle clients now:
+
+```text
+$ telnet 0.0.0.0 8080
+Trying 0.0.0.0...
+Connected to 0.0.0.0.
+Escape character is '^]'.
+I'm going away. Bye!
+I'M GOING AWAY. BYE!
+Connection closed by foreign host.
+```
+
+Hah. They were kicked out in a few seconds of them being idle. Of course, the idle timeout should be tweaked as per
+the application needs and protocol demands.
+
+## Limit your buffers
+
+What happens if a client sends us gigabytes of messages? That's exactly what bad actors do when they want to run Denial-of-Service
+or DoS attacks. We can protect ourselves from such clients if we're careful.
+
+First off, we need to limit the amount of data we read via our connection or `conn`. We can do that using a [LimitedReader](https://golang.org/pkg/io/#LimitedReader).
+A limited reader limits the amount of data it reads at a time. The right place to introduce this would be our wrapped
+connection. Here's how
+
+```go
+func (c *Conn) Read(b []byte) (int, error) {
+	c.updateDeadline()
+	r := io.LimitReader(c.Conn, c.MaxReadBuffer)
+	return r.Read(b)
+}
+```
+
+We use a `LimitReader` in `conn.Read` to read upto `MaxReadBuffer`. We introduce `MaxReadBuffer` as a config parameter like
+we introduced `IdleTimeout`. Now we've managed to limit our read buffer but not the total amount of data that we read. `handle(conn)`
+will keep gobbling data off the socket. Limiting our buffer prevents us from reading too much too fast, thus filling up our
+memory. However, we must handle total limits in our application. How to do this is an exercise from the reader.
+
+## Connection draining
+
+Lastly let's look at how we can gracefully shutdown our server. The strategy is simple
+* On shutdown, stop accepting new connections.
+* Poll all active connections and wait for them to close.
+* Once all active connections have closed, shut down the server.
+
+Here's what a shutdown method could look like
+
+```go
+func (srv *Server) Shutdown() {
+	srv.inShutdown = true
+	log.Println("shutting down...")
+	srv.listener.Close()
+	ticker := time.NewTicker(500 * time.Millisecond)
+	defer ticker.Stop()
+	for {
+		select {
+		case <-ticker.C:
+			log.Printf("waiting on %v connections", len(srv.conns))
+		}
+		if len(srv.conns) == 0 {
+			return
+		}
+	}
+}
+```
+We notify others that we're shutting down and we close the active listener. At this point, no new connections will
+be accepted but existing connections remain unaffected. Next up, we poll the count of active connections every 500ms. Once
+that number goes down to zero, we return, exiting the server.
+
+Now the list of active connections must be tracked. We must re-write the rest of our server to track new connections, remove
+dead ones and change behaviour when the server is shutting down. It'll be a great exercise to try and implement a server that
+can handle the above shutdown. If you get stuck you can refer to my version [here](https://github.com/sahilm/shouter).
+
+## Fin
+
+We now have a TCP server that implements idle timeouts, limits read buffers and drains connections before shutting down. Most
+of the code and ideas in here come from the Go stdlib. Namely the `net/http` package which implements similar behaviour. I would
+highly recommend reading the stdlib source, the code is awesome!
+
+Thanks for reading this article. If you have any feedback please contact me via the interwebz. Links below.
