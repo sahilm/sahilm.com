@@ -61,6 +61,7 @@ func (srv Server) ListenAndServe() error {
 		conn, err := listener.Accept()
 		if err != nil {
 			log.Printf("error accepting connection %v", err)
+			continue
 		}
 		log.Printf("accepted connection from %v", conn.RemoteAddr())
 		handle(conn) //TODO: Implement me
