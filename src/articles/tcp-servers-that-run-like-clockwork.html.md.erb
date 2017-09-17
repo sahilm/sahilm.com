@@ -231,6 +231,7 @@ memory. However, we must handle total limits in our application. How to do this 
 ## Connection draining
 
 Lastly let's look at how we can gracefully shutdown our server. The strategy is simple
+
 * On shutdown, stop accepting new connections.
 * Poll all active connections and wait for them to close.
 * Once all active connections have closed, shut down the server.
