@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Helpers
+module SiteHelpers
   def formatted_date(date)
     date.strftime("#{date.day.ordinalize} %b %Y")
   end
@@ -40,7 +40,7 @@ module Helpers
     display_meta_tags(tags(page))
   end
 
-  def title(page)
+  def site_title(page)
     data = page.data
     if data.type == 'article'
       "#{data.title} | Sahil Muthoo"

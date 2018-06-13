@@ -3,9 +3,9 @@
 require 'middleman-s3_sync'
 require 'middleman-core/renderers/redcarpet'
 require_relative 'lib/anchor_renderer'
-require_relative 'lib/helpers'
+require_relative 'lib/site_helpers'
 
-helpers Helpers
+helpers SiteHelpers
 
 Time.zone = 'Dublin'
 config[:css_dir] = 'css'
@@ -35,7 +35,7 @@ configure :production do
   activate :imageoptim do |options|
     options.manifest = false
     options.image_extensions = %w[.png .jpg .jpeg .gif .svg]
-    options.jpegoptim = {allow_lossy: true, strip: ['all'], max_quality: 85}
+    options.jpegoptim = { allow_lossy: true, strip: ['all'], max_quality: 85 }
   end
   activate :s3_sync do |s3_sync|
     s3_sync.bucket = 'sahilm.com'
