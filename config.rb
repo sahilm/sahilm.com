@@ -2,6 +2,10 @@
 
 require 'middleman-s3_sync'
 require 'middleman-core/renderers/redcarpet'
+require_relative 'lib/anchor_renderer'
+require_relative 'lib/helpers'
+
+helpers Helpers
 
 Time.zone = 'Dublin'
 config[:css_dir] = 'css'
@@ -20,28 +24,6 @@ page '/404.html', layout: '404'
 activate :inliner
 activate :meta_tags
 activate :directory_indexes
-class AnchorRenderer < Middleman::Renderers::MiddlemanRedcarpetHTML
-  def header(title, level)
-    @headers ||= []
-    permalink = title.gsub(/\W+/, '-')
-
-    if @headers.include? permalink
-      permalink += '_1'
-      permalink = permalink.succ while @headers.include? permalink
-    end
-    @headers << permalink
-
-    %(
-      <h#{level} id=\"#{permalink}\" class="title">
-        <a name="#{permalink}" class="anchor icon" href="##{permalink}">
-          <i class="icon-link" title="link"></i>
-          <span class="sr-only">link</span>
-        </a>
-        #{title}
-      </h#{level}>
-    )
-  end
-end
 set :markdown_engine, :redcarpet
 set :markdown, fenced_code_blocks: true, smartypants: true, renderer: AnchorRenderer
 activate :syntax, line_numbers: false, css_class: 'syntax-highlight'
@@ -53,7 +35,7 @@ configure :production do
   activate :imageoptim do |options|
     options.manifest = false
     options.image_extensions = %w[.png .jpg .jpeg .gif .svg]
-    options.jpegoptim = { allow_lossy: true, strip: ['all'], max_quality: 85 }
+    options.jpegoptim = {allow_lossy: true, strip: ['all'], max_quality: 85}
   end
   activate :s3_sync do |s3_sync|
     s3_sync.bucket = 'sahilm.com'
@@ -84,72 +66,4 @@ configure :production do
   end
 
   default_caching_policy public: true, max_age: (60 * 60 * 24 * 365)
-end
-
-helpers do
-  def formatted_date(date)
-    date.strftime("#{date.day.ordinalize} %b %Y")
-  end
-
-  def figure(url, alt: nil, caption: nil)
-    if caption
-      content_tag(:figure) do
-        image_tag(url, alt: alt) + content_tag(:figcaption) { caption }
-      end
-    else
-      image_tag(url, alt: alt)
-    end
-  end
-
-  def mark(text)
-    content_tag(:mark) { text }
-  end
-
-  def fonts(*fonts)
-    <<-EOF
-    <script>
-      WebFont.load({
-                     custom: {
-                       families: #{fonts}
-                     },
-                     timeout: 5000
-                   });
-    </script>
-    EOF
-  end
-
-  def full_url(url)
-    "https://sahilm.com#{url}"
-  end
-
-  def site_meta_tags(page)
-    display_meta_tags(tags(page))
-  end
-
-  def title(page)
-    data = page.data
-    if data.type == 'article'
-      "#{data.title} | Sahil Muthoo"
-    else
-      'Sahil Muthoo'
-    end
-  end
-
-  private
-
-  def tags(page)
-    data = page.data
-    {
-      'og:site_name' => 'Sahil Muthoo',
-      'og:type' => data.type,
-      'og:title' => data.title,
-      'og:url' => full_url(page.url),
-      'og:description' => data.description,
-      'twitter:site' => 'sahilmuthoo',
-      'twitter:creator' => 'sahilmuthoo',
-      'description' => data.description
-    }.tap do |t|
-      t['og:image'] = full_url(image_path(data.image)) if data.image
-    end
-  end
 end
