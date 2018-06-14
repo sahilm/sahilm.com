@@ -49,6 +49,27 @@ module SiteHelpers
     end
   end
 
+  def manifest
+    { short_name: 'sahilm.com',
+      name: 'Sahil Muthoo',
+      icons: [
+        {
+          src: 'images/android-chrome-192x192.png',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: 'images/android-chrome-512x512.png',
+          sizes: '512x512',
+          type: 'image/png'
+        }
+      ],
+      background_color: '#ffffff',
+      display: 'standalone',
+      start_url: '/',
+      theme_color: '#458588' }.to_json
+  end
+
   private
 
   def tags(page)
