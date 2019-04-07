@@ -26,7 +26,7 @@ a {
 }
 
 .container {
-  font-family: $serif-fallback-fonts;
+  font-family: $serif-fonts;
   font-feature-settings: "calt" 1;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -38,10 +38,6 @@ a {
   max-width: 43.75rem;
   overflow-wrap: break-word;
   text-rendering: optimizeLegibility;
-
-  .wf-active & {
-    font-family: $serif-fonts;
-  }
 
   @media #{$phone} {
     margin: 1rem;
@@ -57,10 +53,7 @@ footer {
   text-align: center;
 
   .copyleft {
-    font-family: $serif-fallback-fonts;
-    .wf-active & {
-      font-family: $serif-fonts;
-    }
+    font-family: $serif-fonts;
   }
 
   a {

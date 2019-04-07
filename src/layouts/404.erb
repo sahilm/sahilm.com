@@ -1,8 +1,7 @@
 <% content_for :head do %>
-    <%= fonts('Merriweather') %>
-    <%= stylesheet_inline_tag '404' %>
+  <%= stylesheet_inline_tag '404' %>
 <% end %>
 <% wrap_layout :core do %>
-    <%= yield %>
-    <%= partial 'partials/footer' %>
+  <%= yield %>
+  <%= partial 'partials/footer' %>
 <% end %>

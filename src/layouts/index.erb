@@ -1,8 +1,7 @@
 <% content_for :head do %>
-    <%= fonts('Merriweather') %>
-    <%= stylesheet_inline_tag 'index' %>
+  <%= stylesheet_inline_tag 'index' %>
 <% end %>
 <% wrap_layout :core do %>
-    <%= yield %>
-    <%= partial 'partials/footer' %>
+  <%= yield %>
+  <%= partial 'partials/footer' %>
 <% end %>

@@ -19,19 +19,6 @@ module SiteHelpers
     content_tag(:mark) { text }
   end
 
-  def fonts(*fonts)
-    <<-EOF
-    <script>
-      WebFont.load({
-                     custom: {
-                       families: #{fonts}
-                     },
-                     timeout: 5000
-                   });
-    </script>
-    EOF
-  end
-
   def full_url(url)
     "https://sahilm.com#{url}"
   end

@@ -3,6 +3,7 @@
   src: font-url('fonts/icomoon/fonts.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+  font-display: fallback;
 }
 
 [class^="icon-"], [class*=" icon-"] {

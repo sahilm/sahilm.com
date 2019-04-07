@@ -1,18 +1,17 @@
 <% content_for :head do %>
-    <%= fonts('Fira Code', 'Merriweather') %>
-    <%= stylesheet_inline_tag 'article' %>
+  <%= stylesheet_inline_tag 'article' %>
 <% end %>
 <% current_page.data.type = 'article' %>
 <% wrap_layout :core do %>
-    <article class="article">
-      <header>
-        <div class="heading">
-          <time datetime="<%= current_page.date %>"><%= formatted_date(current_page.date) %></time>
-          / <%= link_to 'Sahil Muthoo', '/' %>
-        </div>
-        <h1><%= current_page.data.title %></h1>
-      </header>
-      <%= yield %>
-    </article>
-    <%= partial 'partials/footer' %>
+  <article class="article">
+    <header>
+      <div class="heading">
+        <time datetime="<%= current_page.date %>"><%= formatted_date(current_page.date) %></time>
+        / <%= link_to 'Sahil Muthoo', '/' %>
+      </div>
+      <h1><%= current_page.data.title %></h1>
+    </header>
+    <%= yield %>
+  </article>
+  <%= partial 'partials/footer' %>
 <% end %>

@@ -22,11 +22,7 @@
     font-weight: 400;
     background-color: $code-bgcolor;
 
-    font-family: $sans-fallback-fonts;
-
-    .wf-active & {
-      font-family: $sans-fonts;
-    }
+    font-family: $sans-fonts;
   }
 
   .anchor {
@@ -79,26 +75,18 @@
     }
 
     figcaption {
-      font-family: $sans-fallback-fonts;
+      font-family: $sans-fonts;
       font-size: .6rem;
       margin: .2rem 0 0;
       text-align: center;
-
-      .wf-active & {
-        font-family: $sans-fonts;
-      }
     }
   }
 
   .heading {
     display: block;
-    font-family: $sans-fallback-fonts;
+    font-family: $sans-fonts;
     font-size: .7rem;
     margin: .5rem 0 0;
-
-    .wf-active & {
-      font-family: $sans-fonts;
-    }
   }
 
   header {
