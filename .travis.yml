@@ -5,6 +5,8 @@ cache:
   - node_modules
   - "$HOME/bin"
 before_install:
+- gem update --system
+- gem install bundler
 - nvm install node
 - ci/install_deps.sh
 - export PATH=$PATH:$HOME/bin/:$(npm bin)
