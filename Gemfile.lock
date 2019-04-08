@@ -190,23 +190,23 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport
-  builder
-  execjs
-  middleman
-  middleman-blog
+  activesupport (~> 5)
+  builder (~> 3)
+  execjs (~> 2)
+  middleman (~> 4)
+  middleman-blog (~> 4)
   middleman-imageoptim!
   middleman-inliner!
-  middleman-meta-tags
-  middleman-minify-html
-  middleman-s3_sync
-  middleman-syntax
-  mime-types
-  nokogiri
-  oj
-  rake
-  redcarpet
-  sassc
+  middleman-meta-tags (~> 0)
+  middleman-minify-html (~> 3)
+  middleman-s3_sync (~> 4)
+  middleman-syntax (~> 3)
+  mime-types (~> 3)
+  nokogiri (~> 1)
+  oj (~> 3)
+  rake (~> 12)
+  redcarpet (~> 3)
+  sassc (~> 1)
 
 BUNDLED WITH
-   1.16.2
+   1.17.2
