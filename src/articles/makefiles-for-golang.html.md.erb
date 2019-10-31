@@ -131,7 +131,7 @@ indicate that no such file will exist. Make should run the rule every time it's 
 of a matching file. This makes sense for a test rule where you just want to run tests. Not generate files.
 
 We also declare a variable called `PKGS`. It contains the list of packages under test. The shell code inside `$(...)` is
-evaluated once and it's output (STDOUT) is saved in `PKGS`. It's the usual list of packages without packages in vendor.
+evaluated once and its output (STDOUT) is saved in `PKGS`. It's the usual list of packages without packages in vendor.
 
 To run this rule just type `make`. We should now have running tests. w00t!
 
@@ -193,7 +193,7 @@ from a variable that points to the install path of `gometalinter`. Finally, we h
 Notice how we refer to the `GOPATH` in `BIN_DIR`. `GOPATH` is an environment variable that's usable in Makefiles similar
 to other variables.
 
-This generated rule isn't useful on it's own. <mark>It shines when it's used as a prerequisite.</mark> Let's go ahead
+This generated rule isn't useful on its own. <mark>It shines when it's used as a prerequisite.</mark> Let's go ahead
 and add the generated rule as a prerequisite of the `lint` rule:
 
 ```text
@@ -228,7 +228,7 @@ lint: $(GOMETALINTER)
 ```
 
 `test` depends on `lint` which depends on `$(GOMETALINTER)`. `test -> lint -> $(GOMETALINTER)`. That's how Make will
-build it's dependency graph pruning up-to-date targets along the way.
+build its dependency graph pruning up-to-date targets along the way.
 
 Let's examine the output of running `make` for the first time:
 
@@ -329,7 +329,7 @@ to being evaluated once at declaration time.
 
 Under the hood, `$(PLATFORMS)` expands to the targets similar to the targets we declared earlier. Within each's recipe
 we use the `word` function to extract the only word (windows, linux or darwin) from the name of the target. We can run
-`make release -j3` to confirm it's behaviour.
+`make release -j3` to confirm its behaviour.
 
 ### Injecting values at build time
 
