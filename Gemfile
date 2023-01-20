@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
-gem 'activesupport', '~> 5'
+gem 'activesupport', '~> 6'
 gem 'builder', '~> 3'
 gem 'execjs', '~> 2'
 gem 'middleman', '~> 4.3'
