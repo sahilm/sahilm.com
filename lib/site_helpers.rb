@@ -24,7 +24,8 @@ module SiteHelpers
   end
 
   def site_meta_tags(page)
-    display_meta_tags(tags(page))
+    set_meta_tags(tags(page))
+    display_meta_tags
   end
 
   def site_title(page)

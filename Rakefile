@@ -7,11 +7,6 @@ task :run do
   sh 'middleman server'
 end
 
-desc 'sync site to s3'
-task :s3_sync do
-  sh 'middleman s3_sync -B -e production'
-end
-
 namespace :build do
   desc 'clean'
   task :clean do
