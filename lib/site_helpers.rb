@@ -6,6 +6,7 @@ module SiteHelpers
   end
 
   def figure(url, alt: nil, caption: nil)
+    url = "/articles/#{url}"
     if caption
       content_tag(:figure) do
         image_tag(url, alt: alt) + content_tag(:figcaption) { caption }
@@ -20,7 +21,7 @@ module SiteHelpers
   end
 
   def full_url(url)
-    "https://sahilm.com#{url}"
+    "#{config[:site_origin]}#{url_for(url == '/' ? '/index.html' : url)}"
   end
 
   def site_meta_tags(page)
@@ -54,7 +55,7 @@ module SiteHelpers
       ],
       background_color: '#ffffff',
       display: 'standalone',
-      start_url: '/',
+      start_url: url_for('/index.html'),
       theme_color: '#458588' }.to_json
   end
 

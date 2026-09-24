@@ -10,6 +10,7 @@ Time.zone = 'Dublin'
 config[:css_dir] = 'css'
 config[:js_dir] = 'js'
 config[:source] = 'src'
+set :site_origin, 'https://sahilm.github.io'
 page '/feed.xml', layout: false
 page '/sitemap.xml', layout: false
 activate :blog do |blog|
@@ -27,6 +28,7 @@ set :markdown_engine, :redcarpet
 set :markdown, fenced_code_blocks: true, smartypants: true, renderer: AnchorRenderer
 activate :syntax, line_numbers: false, css_class: 'syntax-highlight'
 configure :production do
+  set :http_prefix, '/sahilm.com'
   activate :asset_hash
   activate :minify_css, inline: true
   activate :minify_javascript, inline: true

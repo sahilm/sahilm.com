@@ -1,4 +1,4 @@
-Source code and articles for [sahilm.com](https://sahilm.com)
+Source code and articles for [Sahil Muthoo’s website](https://sahilm.github.io/sahilm.com/)
 
 ## Build and preview
 
@@ -22,25 +22,17 @@ bundle exec rake build:production
 `master`. It can also be run manually from the Actions tab. Deployment uses
 GitHub's built-in token; no AWS credentials or separate deployment token is needed.
 
+The site is hosted at https://sahilm.github.io/sahilm.com/ with HTTPS enforced.
 In repository **Settings → Pages**, select **GitHub Actions** as the source and
-set the custom domain to `sahilm.com`. With Actions publishing, the domain is
-configured in GitHub settings, not a repository `CNAME` file. The site uses
-root-relative paths and canonical URLs for this custom domain.
+leave the custom domain empty.
 
-After configuring the domain in GitHub, set these DNS records:
+Production builds use `/sahilm.com` as Middleman's `http_prefix`. Navigation,
+assets, canonical URLs, feeds, and the sitemap use this prefix. The development
+server uses `/` for local preview.
 
-| Type | Name | Value |
-| --- | --- | --- |
-| A | @ | 185.199.108.153 |
-| A | @ | 185.199.109.153 |
-| A | @ | 185.199.110.153 |
-| A | @ | 185.199.111.153 |
-| CNAME | www | sahilm.github.io |
-
-Replace conflicting web-hosting records, including old apex AAAA records if
-present. Alternatively, an apex ALIAS/ANAME can point to `sahilm.github.io`.
-Once DNS validates and GitHub issues the certificate, enable **Enforce HTTPS**.
-See [GitHub's custom domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
+To move to a custom domain later, update `site_origin` and the production
+`http_prefix` in `config.rb`, configure the custom domain in Pages settings,
+and then update DNS. No repository `CNAME` file is needed for Actions publishing.
 
 # LICENSES
 
